@@ -29,4 +29,20 @@ class ListUser {
         t = t->next;
       }
     }
+
+    bool checkUser(const string &Name) {
+      User *t = head;
+      while(t) {
+        if(t->name == Name){
+          cout << "User : " << t->name << endl;
+          cout << "Credit : ";
+          t->show_money();
+          cout << " $" << endl;
+          return true;
+        }else {
+          t = t->next;
+        }
+      }
+      return false;
+    }
 };

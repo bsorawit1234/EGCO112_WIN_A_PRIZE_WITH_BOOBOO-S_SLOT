@@ -1,11 +1,12 @@
 #include <iostream>
+#include <conio.h>
 #include <cstdlib>
 #include <unistd.h>
 
 using namespace std;
 
 void print_slot(string s1, string s2, string s3) {
-  system("clear");
+  system("cls");
   cout << "   SLOT " << endl;
   cout << " -------" << endl;
   cout << " |" << s1 << "|" << s2 << "|" << s3 << "|" << endl;
