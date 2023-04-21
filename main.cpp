@@ -2,33 +2,35 @@
 #include <iomanip>
 #include <cstdlib>
 #include <ctime>
+
+#ifdef _WIN32
+#include <windows.h>
+#else
 #include <unistd.h>
-#include <chrono>
-#include <thread>
+#endif
 
 using namespace std;
 
 #include "ListUser.h"
-// #include "random.h"
 
-int *random_slot() {
-  int *random_num = new int[3];
-  for(int i = 10; i >= 0; i--) {
-    random_num[0] = rand() % 10;
-    random_num[1] = rand() % 10;
-    random_num[2] = rand() % 10;
+void msleep(int ms) {
+  #ifdef _WIN32
+    Sleep(ms);
+  #else
+    usleep(ms * 1000);
+  #endif
+}
 
-    cout << "\r" << random_num[0] << random_num[1] << random_num[2]; // print the number with a carriage return to overwrite the previous number
-    
-    fflush(stdout); // flush the output buffer
-    // usleep(1000000 / i); // add a delay of 100ms between each frame
-    sleep(i/10);
-  }
-  return random_num;
+void clear_screen() {
+  #ifdef _WIN32
+    system("cls");
+  #else
+    system("clear");
+  #endif
 }
 
 void print_slot(string s1, string s2, string s3) {
-  system("cls");
+  clear_screen();
   cout << "   SLOT " << endl;
   cout << " -------" << endl;
   cout << " |" << s1 << "|" << s2 << "|" << s3 << "|" << endl;
@@ -55,7 +57,7 @@ int main() {
 
   print_slot(s[0], s[1], s[2]);
 
-  for(int k = 0; k < 5; k++) {
+  // for(int k = 0; k < 5; k++) {
     int n[3] = {rand() % 10, rand() % 10, rand() % 10};
     for(int i = 0; i < 3; i++) {
       for(int j = 0; j < 10; j++) {
@@ -66,9 +68,10 @@ int main() {
         print_slot(s[0], s[1], s[2]);
 
         fflush(stdout);
-        usleep(100000);
+        // usleep(100000);
+        msleep(100);
       }
-    }
+    // }
 
     check_result_slot(n[0], n[1], n[2], money);
   }

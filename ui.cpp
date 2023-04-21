@@ -7,7 +7,6 @@
 using namespace std;
 
 #include "ListUser.h"
-#include "random.h"
 
 int main(int argc, char *argv[]) {
     ListUser A; 
