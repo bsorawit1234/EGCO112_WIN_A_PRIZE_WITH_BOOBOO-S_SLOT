@@ -3,6 +3,7 @@
 class ListUser {
   private:
     User *head;
+    int size = 0;
   public:
     ListUser() {
       head = nullptr;
@@ -20,6 +21,8 @@ class ListUser {
         }
         current->next = newUser;
       }
+      
+      size++;
     }
 
     void display() {
