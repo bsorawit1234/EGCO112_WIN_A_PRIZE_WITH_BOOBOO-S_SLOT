@@ -10,8 +10,11 @@ class User {
 
     void withdraw(float);
     void deposit(float);
-    void show_money(){
+    void display_money(){
       cout << money;
+    }
+    float show_money() {
+      return money;
     }
 };
 
@@ -44,5 +47,7 @@ void User::deposit(float d) {
     cout << name << " deposit money: " << d << endl;
     cout << "Credits: " << credits << endl;
     cout << "Money  : " << money << endl;
+  } else {
+    cout << "You have insufficient money." << endl;
   }
 }

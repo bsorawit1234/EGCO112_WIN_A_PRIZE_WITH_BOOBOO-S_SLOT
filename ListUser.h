@@ -32,23 +32,63 @@ class ListUser : public exception{
 
     void checkUser(const string &Name, float &bet){
       User *t = head;
+      int flags, flags_for_nested;
+      float deposit; 
+      char yes_or_no;
       while(t) {
         if(t->name == Name){
           cout << "User : " << t->name << endl;
           cout << "Credit : ";
-          t->show_money();
+          t->display_money();
           cout << " $" << endl;
-          cout << "Bet Amount : ", cin >> bet;
-          cin.clear();
-          cout << "\033[F";
-          cout << "Bet Amount : " << bet << " $" << endl;
-          break;
+          try{
+            flags = 0;
+            cout << "Bet Amount : ";
+            cin >> bet;
+            cin.clear();
+            if(bet > t->show_money()) {
+              cout << "\033[F";
+              cout << "Bet Amount : " << bet << " $" << endl;
+              cout << "You have insufficient credit." << endl;
+              do {
+                if(flags_for_nested) {
+                  /* clear the screen after loop */
+                }
+                flags_for_nested = 0;
+                cout << "Do you want to deposit money?(Y/N) " << endl;
+                cin >> yes_or_no;
+                cin.clear();
+                if(yes_or_no == 'y' || yes_or_no == 'Y') {
+                  /* add credits */
+                  cout << "How much credit do you want to deposit? : ";
+                  cin >> deposit;
+                  //cin.clear();
+                  t->deposit(deposit);
+                } else if(yes_or_no == 'n' || yes_or_no == 'N') {
+                  /* exit program */
+                  for(int i = 0; i < 3; i++) {
+                    cout << "\033[F"; /* clear 3 lines before error message. */
+                  }
+                  throw "You have insufficient credits.";
+                } else {
+                  flags_for_nested = 1;
+                }
+              } while(flags_for_nested);
+            }
+            cout << "\033[F";
+            cout << "Bet Amount : " << bet << " $" << endl;
+          } catch(const char* e) {
+            flags = 1;
+            cout << e << endl;
+          }
         } else {
-          t = t->next;
           if(!t) {
             throw "Username is invalid.";
           }
         }
+        t = t->next;
       }
     }
+
+
 };
