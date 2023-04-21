@@ -1,6 +1,6 @@
 #include "User.h"
 
-class ListUser {
+class ListUser : public exception{
   private:
     User *head;
   public:
@@ -30,7 +30,7 @@ class ListUser {
       }
     }
 
-    bool checkUser(const string &Name) {
+    void checkUser(const string &Name, float &bet){
       User *t = head;
       while(t) {
         if(t->name == Name){
@@ -38,11 +38,17 @@ class ListUser {
           cout << "Credit : ";
           t->show_money();
           cout << " $" << endl;
-          return true;
-        }else {
+          cout << "Bet Amount : ", cin >> bet;
+          cin.clear();
+          cout << "\033[F";
+          cout << "Bet Amount : " << bet << " $" << endl;
+          break;
+        } else {
           t = t->next;
+          if(!t) {
+            throw "Username is invalid.";
+          }
         }
       }
-      return false;
     }
 };
