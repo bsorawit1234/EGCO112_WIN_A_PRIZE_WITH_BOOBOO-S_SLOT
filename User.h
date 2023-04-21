@@ -10,6 +10,9 @@ class User {
 
     void withdraw(float);
     void deposit(float);
+    void show_money(){
+      cout << money;
+    }
 };
 
 User::User(string n, float m) {
