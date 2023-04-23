@@ -12,7 +12,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     ListUser A; 
-    User B;
+    User B; 
     string name;
     int flags; 
     float money, bet;
@@ -35,7 +35,21 @@ int main(int argc, char *argv[]) {
         }
     } while(flags);
     cout << "End program." << endl;
+    int round=0;
 
+    /*while(a){
+        round++;
+        if(round==1){
+            B.bet();
+        }
+        if(round>1){
+            check_result_slot(n[0], n[1], n[2], money);
+            bet_amount();
+        }
+        print_slot(n[0], n[1], n[2], bet);
+        check_credit(n[0], n[1], n[2], bet);
+        cout<<
+    }*/
 
 
     

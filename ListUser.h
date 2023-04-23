@@ -30,7 +30,7 @@ class ListUser : public exception{
       }
     }
 
-    void checkUser_and_insert_bet(const string &Name, float &bet_amount){
+    void checkUser_and_insert_bet(const string &Name, float &bet_amountt){
       User *t = head;
       int flags;
       float deposit; 
@@ -43,11 +43,11 @@ class ListUser : public exception{
           cout << '\n';
           try{
             cout << "Bet Amount : ";
-            cin >> bet_amount;
+            cin >> bet_amountt;
             cin.clear();
             cout << "\033[F\033[K";
-            cout << "Bet Amount : " << '$' << bet_amount << endl;
-            if(bet_amount > t->show_credits()) {
+            cout << "Bet Amount : " << '$' << bet_amountt << endl;
+            if(bet_amountt > t->show_credits()) {
               cout << "You have insufficient credit." << endl;
               do {
                 flags = 0;
@@ -70,7 +70,10 @@ class ListUser : public exception{
                   flags = 1;
                 }
               } while(flags);
+            } else {
+              t->bet_amount(bet_amountt);
             }
+
           } catch(const char* e) {
             cout << e << endl;
           }

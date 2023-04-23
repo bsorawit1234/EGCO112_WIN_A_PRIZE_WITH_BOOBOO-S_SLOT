@@ -7,11 +7,11 @@ class User {
     string name;
     User* next;
 
-    User(string, float);
+    User(string = "Tee", float = 0);
 
     void withdraw(float);
     void deposit(float);
-    int bet();
+    //void bet_(float);
     void bet_amount(float);
     void display_credits(){
       cout << credits;
@@ -54,14 +54,14 @@ void User::deposit(float d) {
   }
 }
 
-int User::bet(float b){
-  bet=b;
-  credits -= b;\
+void User::bet_amount(float b){
+  bet = b;
+  credits -= b;
 
   cout<<"Credit : "<<credits<<"$"<<endl;
-  return credits;
+  //return credits;
 }
 
 
-void User::bet_amount()
+//void User::bet_amount()
 
