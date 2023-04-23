@@ -2,6 +2,7 @@ class User {
   private:
     float credits;
     float money;
+    float bet;
   public:
     string name;
     User* next;
@@ -10,6 +11,8 @@ class User {
 
     void withdraw(float);
     void deposit(float);
+    int bet();
+    void bet_amount(float);
     void display_credits(){
       cout << credits;
     }
@@ -50,3 +53,15 @@ void User::deposit(float d) {
     cout << "Money  : " << money << endl;
   }
 }
+
+int User::bet(float b){
+  bet=b;
+  credits -= b;\
+
+  cout<<"Credit : "<<credits<<"$"<<endl;
+  return credits;
+}
+
+
+void User::bet_amount()
+

@@ -8,9 +8,11 @@
 using namespace std;
 
 #include "ListUser.h"
+#include "User.h"
 
 int main(int argc, char *argv[]) {
     ListUser A; 
+    User B;
     string name;
     int flags; 
     float money, bet;
