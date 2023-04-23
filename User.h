@@ -10,18 +10,19 @@ class User {
 
     void withdraw(float);
     void deposit(float);
-    void display_money(){
-      cout << money;
+    void display_credits(){
+      cout << credits;
     }
-    float show_money() {
-      return money;
+    float show_credits() {
+      return credits; 
     }
 };
 
 User::User(string n, float m) {
   name = n;
   money = m;
-  next = nullptr;
+  credits = 20;
+  next = NULL;
 
   cout << "Create User success" << endl;
   cout << "name : " << name << endl;
@@ -47,7 +48,5 @@ void User::deposit(float d) {
     cout << name << " deposit money: " << d << endl;
     cout << "Credits: " << credits << endl;
     cout << "Money  : " << money << endl;
-  } else {
-    cout << "You have insufficient money." << endl;
   }
 }

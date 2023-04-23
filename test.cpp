@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <cstdlib>
 #include <unistd.h>
+#include <string>
 
 using namespace std;
 

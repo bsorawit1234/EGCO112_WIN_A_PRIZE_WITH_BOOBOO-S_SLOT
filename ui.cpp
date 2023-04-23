@@ -12,27 +12,27 @@ using namespace std;
 int main(int argc, char *argv[]) {
     ListUser A; 
     string name;
-    int flags;
+    int flags; 
     float money, bet;
     bool check_user;
     //User fill the information.
     for(int i = 1; i < argc; i+=2) {
         A.insert(argv[i], atof(argv[i+1]));
-    }
+    } 
+    system("cls");
     do{
         try {
             flags = 0;
-            system("cls");
             cout << "User : ";
             getline(cin, name);
             cout << "\033[F";
-            A.checkUser(name, bet);
+            A.checkUser_and_insert_bet(name, bet);
         } catch(const char*& e) {
             flags = 1;
             cerr << e << endl;
         }
     } while(flags);
-
+    cout << "End program." << endl;
 
 
 
