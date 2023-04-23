@@ -12,6 +12,7 @@
 using namespace std;
 
 #include "ListUser.h"
+#include "User.h"
 
 void msleep(int ms) {
   #ifdef _WIN32
@@ -47,6 +48,21 @@ void check_result_slot(int n1, int n2, int n3, int &money) {
   } else if(n1 == n3) {
     money *= 3;
   }
+}
+
+void check_credit(int n1, int n2, int n3, int &bet ){
+  if(n1 == n2 && n2 == n3) { 
+    bet *= 10;
+  } else if(n3 - n2 == 1 && n2 - n1 == 1) {
+    bet *= 5;
+  } else if(n3 - n2 == -1 && n2 - n1 == -1) {
+    bet *= 5;
+  } else if(n1 == n3) {
+    bet *= 3;
+  } else {
+    bet = -bet;
+  }
+  cout<<"Credit : "<<bet<<endl;
 }
 
 int main() {

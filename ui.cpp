@@ -7,9 +7,11 @@
 using namespace std;
 
 #include "ListUser.h"
+#include "User.h"
 
 int main(int argc, char *argv[]) {
     ListUser A; 
+    User B;
     string name;
     float money, bet;
     bool check_user;
@@ -30,8 +32,27 @@ int main(int argc, char *argv[]) {
     } else {
         cerr << "Username is invalid." << endl;
     }
+    
+
+     int round=0;
+
+     while(a){
+        round++;
+        if(round==1){
+            B.bet();
+        }
+        if(round>1){
+            check_result_slot(n[0], n[1], n[2], money);
+            bet_amount();
+        }
+        print_slot(n[0], n[1], n[2], bet);
+        check_credit(n[0], n[1], n[2], bet);
+        cout<<
+     }
 
 
+
+    
 
 
 
