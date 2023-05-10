@@ -7,7 +7,7 @@ class User {
     string name;
     User* next;
 
-    User(string = "Tee", float = 0);
+    User(string = "Tee", float = 0, float = 0);
     ~User();
     void withdraw(float);
     void deposit(float);
@@ -21,15 +21,16 @@ class User {
     void insert_bet(float &);
 };
 
-User::User(string n, float m) {
+User::User(string n, float m, float c) {
   name = n;
   money = m;
-  credits = 20;
+  credits = c;
   next = NULL;
 
   cout << "Create User success" << endl;
-  cout << "name : " << name << endl;
-  cout << "money: $" << money << endl;
+  cout << "name    : " << name << endl;
+  cout << "money   : $" << money << endl;
+  cout << "credits : $" << credits << endl;
 }
 
 User::~User() {
@@ -58,7 +59,8 @@ void User::deposit(float d) {
   }
 }
 
-void User::bet_amount(float b){
+void User::bet_amount(float b) {
+  // credits_balance
   bet = b;
   credits -= b;
 
@@ -74,7 +76,6 @@ void User::insert_bet(float &bet_amountt) {
   try{
     cout << "Bet Amount : ";
     cin >> bet_amountt;
-    cin.clear();
     cout << "\033[F\033[K";
     cout << "Bet Amount : " << '$' << bet_amountt << endl;
     if(bet_amountt > t->show_credits()) {
@@ -84,11 +85,11 @@ void User::insert_bet(float &bet_amountt) {
         cout << "Do you want to deposit money?(Y/N) ";
         cin >> yes_or_no;
         cin.clear();
+        cin.ignore(256, '\n');
         if(yes_or_no == 'y' || yes_or_no == 'Y') {
           /* add credits */
           cout << "How much credit do you want to deposit? : ";
           cin >> deposit;
-          cin.clear();
           t->deposit(deposit);
         } else if(yes_or_no == 'n' || yes_or_no == 'N') {
           /* exit program */

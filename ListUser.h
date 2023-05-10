@@ -24,8 +24,8 @@ class ListUser{
      cout << "LL has been destructor." << endl;
     }
 
-    void insert(string n, float m) {
-      User *newUser = new User(n, m);
+    void insert(string n, float m, float c) {
+      User *newUser = new User(n, m, c);
 
       if(head == NULL) {
         head = newUser;
@@ -46,29 +46,5 @@ class ListUser{
         t = t->next;
       }
     }
-
-    User *checkUser(const string &Name){
-      User *t = head;
-      int flags;
-      float deposit; 
-      char yes_or_no;
-      while(t) {
-        if(t->name == Name){
-          cout << "User : " << t->name << endl;
-          cout << "Credit : " << '$' ;
-          t->display_credits();
-          cout << '\n';
-          break;
-        } else {
-          if(t->next == NULL) {
-            throw "The username you entered isn't valid.";
-          }
-          t = t->next;
-        }
-      }
-      return t;
-    }
-
-
 
 };
