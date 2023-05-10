@@ -1,51 +1,51 @@
 #include "User.h"
 
-class ListUser {
+class ListUser{
   private:
     User *head;
-    int size = 0;
+    int size;
+
   public:
     ListUser() {
-      head = nullptr;
+      head = NULL;
+      size = 0;
     }
 
-    void insert(string n, float m) {
-      User *newUser = new User(n, m);
+    ~ListUser() {
+    //clear all nodes
+      User *temp = head;
+      while(size != 0){
+          if(temp != NULL){
+               temp = head->next;
+               delete(head);
+               head = temp;
+               size--;
+          }
+      }
+     cout << "LL has been destructor." << endl;
+    }
 
-      if(head == nullptr) {
+    void insert(string n, float m, float c) {
+      User *newUser = new User(n, m, c);
+
+      if(head == NULL) {
         head = newUser;
       } else {
         User *current = head;
-        while(current->next != nullptr) {
+        while(current->next != NULL) {
           current = current->next;
         }
         current->next = newUser;
       }
-      
       size++;
     }
 
     void display() {
       User *t = head;
-      while(t != nullptr) {
+      while(t != NULL) {
         cout << t->name << endl;
         t = t->next;
       }
     }
 
-    bool checkUser(const string &Name) {
-      User *t = head;
-      while(t) {
-        if(t->name == Name){
-          cout << "User : " << t->name << endl;
-          cout << "Credit : ";
-          t->show_money();
-          cout << " $" << endl;
-          return true;
-        }else {
-          t = t->next;
-        }
-      }
-      return false;
-    }
 };
