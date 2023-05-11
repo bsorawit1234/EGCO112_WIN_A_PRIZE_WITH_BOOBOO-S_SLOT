@@ -1,0 +1,5 @@
+thin jk 50 20
+jk kl 500 20
+ui ui 40 20
+fd fd 50 20
+re re 50 20

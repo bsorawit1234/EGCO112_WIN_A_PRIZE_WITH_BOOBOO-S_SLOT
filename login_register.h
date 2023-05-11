@@ -1,23 +1,9 @@
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <cstdlib>
-#include <ctime>
-#include <exception>
-#include <unistd.h>
-#include <sstream>
-
-using namespace std;
-
-#include "ListUser.h"
-#include "excep_tion.h"
-
 /*
               Total.txt
     username password money credits
 */
 
-int main() {
+void login_register() {
     ListUser Players;
     string user, pass, repass, read_from_file, users, passe; 
     int choose = 1, flag;
@@ -147,5 +133,4 @@ int main() {
     }
     insert_ll.close();
 
-    return 0;
 }
