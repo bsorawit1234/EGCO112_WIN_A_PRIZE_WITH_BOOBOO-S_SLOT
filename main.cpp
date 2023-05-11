@@ -1,18 +1,23 @@
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <cstdlib>
 #include <ctime>
+#include <exception>
+#include <sstream>
 
 #ifdef _WIN32
-#include <windows.h>
+  #include <windows.h>
 #else
-#include <unistd.h>
+  #include <unistd.h>
 #endif
+  
 
 using namespace std;
 
 #include "ListUser.h"
-#include "User.h"
+#include "excep_tion.h"
+#include "login_register.h"
 
 void msleep(int ms) {
   #ifdef _WIN32
@@ -66,6 +71,9 @@ void check_credit(int n1, int n2, int n3, int &bet ){
 }
 
 int main() {
+
+  login_register();
+
   srand(time(NULL));
   int money = 10;
 
@@ -84,8 +92,8 @@ int main() {
         print_slot(s[0], s[1], s[2]);
 
         fflush(stdout);
-        // usleep(100000);
-        msleep(100);
+        //usleep(100000);
+        msleep(100); 
       }
     // }
 
