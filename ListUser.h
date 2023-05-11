@@ -4,6 +4,7 @@ class ListUser{
   private:
     User *head;
     int size;
+
   public:
     ListUser() {
       head = NULL;
