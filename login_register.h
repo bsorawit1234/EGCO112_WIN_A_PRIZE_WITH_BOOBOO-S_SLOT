@@ -1,12 +1,12 @@
 /*
-              Total.txt
+            Total.txt
     username password money credits
 */
 
-void login_register() {
+void login_register(int choose) {
     ListUser Players;
     string user, pass, repass, read_from_file, users, passe; 
-    int choose = 1, flag;
+    int flag;
     float money, Money, credits;
     const float STARTER_CREDITS = 20;
     space sp;
@@ -116,7 +116,6 @@ void login_register() {
                 file.close();
                 if(count == 0) exit(1);
             } while (flag);
-
         } break;
 
         default : cout << "eiei" << endl;
