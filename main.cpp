@@ -6,13 +6,6 @@
 #include <exception>
 #include <sstream>
 
-#ifdef _WIN32
-  #include <windows.h>
-#else
-  #include <unistd.h>
-#endif
-  
-
 using namespace std;
 
 #include "ListUser.h"
@@ -20,100 +13,52 @@ using namespace std;
 #include "login_register.h"
 #include "home.h"
 
-void msleep(int ms) {
-  #ifdef _WIN32
-    Sleep(ms);
-  #else
-    usleep(ms * 1000);
-  #endif
-}
-
-void clear_screen() {
-  #ifdef _WIN32
-    system("cls");
-  #else
-    system("clear");
-  #endif
-}
-
-void print_slot(string s1, string s2, string s3) {
+void start(User &player) {
+  int choose, check_choose = 1;
   clear_screen();
-  cout << "   SLOT " << endl;
-  cout << " -------" << endl;
-  cout << " |" << s1 << "|" << s2 << "|" << s3 << "|" << endl;
-  cout << " -------" << endl;
-}
-
-void check_result_slot(int n1, int n2, int n3, float &money) {
-  if(n1 == n2 && n2 == n3) { 
-    money *= 10;
-  } else if(n3 - n2 == 1 && n2 - n1 == 1) {
-    money *= 5;
-  } else if(n3 - n2 == -1 && n2 - n1 == -1) {
-    money *= 5;
-  } else if(n1 == n3) {
-    money *= 3;
-  }
-}
-
-void check_credit(int n1, int n2, int n3, int &bet ){
-  if(n1 == n2 && n2 == n3) { 
-    bet *= 10;
-  } else if(n3 - n2 == 1 && n2 - n1 == 1) {
-    bet *= 5;
-  } else if(n3 - n2 == -1 && n2 - n1 == -1) {
-    bet *= 5;
-  } else if(n1 == n3) {
-    bet *= 3;
-  } else {
-    bet = -bet;
-  }
-  cout<<"Credit : "<<bet<<endl;
-}
-
-void slot_game(float money) {
-  string s[3] = {"0", "0", "0"};
-
-  print_slot(s[0], s[1], s[2]);
-
-  int n[3] = {rand() % 10, rand() % 10, rand() % 10};
-  for(int i = 0; i < 3; i++) {
-    for(int j = 0; j < 10; j++) {
-      n[i]++;
-      if(n[i] == 10) n[i] = 0;
-      s[i] = to_string(n[i]);
-      
-      print_slot(s[0], s[1], s[2]);
-
-      fflush(stdout);
-      msleep(100); 
-    }
-    check_result_slot(n[0], n[1], n[2], money);
-  }
-  cout << endl << "money: " << money << endl;
-}
-
-int main() {
-  clear_screen();
-  int choose;
   cout << "GAME NAME" << endl;
   cout << "1. REGISTER" << endl;
   cout << "2. LOGIN" << endl;
-  cout << "choose: ";
+  cout << "3. EXIT" << endl;
 
-  cin >> choose;
+  while(check_choose) {
+    try {
+      cout << "choose: ";
+      cin >> choose;
+      
+      if(cin.fail()) {
+        cin.clear();
+        cin.ignore(256,'\n');
+        throw "ONLY NUMBER !!";
+      }
+
+      if(choose < 1 || choose > 3) {
+        throw "CHOOSE BETWEEN 1-3";
+      }
+      check_choose = 0;
+    } catch(const char* s) {
+      cout << endl << s << endl << endl;
+    }
+  }
 
   switch(choose) {
     case 1:
       login_register(1);
+      break;
     case 2:
       login_register(2);
+      break;
+    case 3:
+      // return;
+      home(player);
+      start(player);
+      break;
   }
+}
 
+int main() {
   srand(time(NULL));
 
-  
-
-
-
+  User u1("boom", 5000, 5000); // for testing
+  start(u1);
 }

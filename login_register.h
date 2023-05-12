@@ -12,8 +12,10 @@ void login_register(int choose) {
     space sp;
     passwordmatch pm;
     numonly nu;
-
-    system("cls");
+    
+    cin.clear();
+    cin.ignore(256,'\n');
+    // system("cls||clear");
     switch(choose) {
         //register 
         case 1 : {
