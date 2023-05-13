@@ -17,8 +17,9 @@
 #include "login_register.h"
 #include "home.h"
 
-void start(User *player) {
+void start() {
   ListUser Players;
+  User *player;
   int choose, check_choose = 1;
   std::string user, users, passe, read_from_file;
   float Money, credit;
@@ -35,26 +36,11 @@ void start(User *player) {
   std::cout << " " << std::endl;
   std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
 
-  std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
-  std::cout << "       WELCOME TO WIN A PRIZE WITH BOO BOO'S SLOT      " << std::endl;
-  std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
-  std::cout << " " << std::endl;
-  std::cout << "                   PRESS 1 TO REGISTER                " << std::endl;
-  std::cout << "                   PRESS 2 TO LOGIN " << std::endl;
-  std::cout << "                   PRESS 3 TO EXIT GAME" << std::endl;
-  std::cout << " " << std::endl;
-  std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
-
   while(check_choose) {
     try {
       std::cout << "choose: ";
       std::cin >> choose;
-      std::cout << "choose: ";
-      std::cin >> choose;
       
-      if(std::cin.fail()) {
-        std::cin.clear();
-        std::cin.ignore(256,'\n');
       if(std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(256,'\n');
@@ -66,7 +52,6 @@ void start(User *player) {
       }
       check_choose = 0;
     } catch(const char* s) {
-      std::cout << std::endl << s << std::endl << std::endl;
       std::cout << std::endl << s << std::endl << std::endl;
     }
   }
@@ -96,7 +81,7 @@ void start(User *player) {
   player = Players.find_node(user);
 
   home(player);
-  start(player);
+  start();
 
 }
 
@@ -130,7 +115,7 @@ int main() {
 
   intro();
 
+  start();
 
-  User *u1 = new User("boom", 5000, 5000); // for testing
-  start(u1);
+  return 0;
 }
