@@ -17,6 +17,7 @@
 #include "home.h"
 
 void start(User *player) {
+  User *t;
   int choose, check_choose = 1;
   clear_screen();
 
@@ -52,10 +53,10 @@ void start(User *player) {
 
   switch(choose) {
     case 1:
-      login_register(1);
+      t = login_register(1);
       break;
     case 2:
-      login_register(2);
+      t =login_register(2);
       break;
     case 3:
       // return;
