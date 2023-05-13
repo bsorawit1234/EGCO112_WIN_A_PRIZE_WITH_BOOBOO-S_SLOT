@@ -3,37 +3,38 @@
     username password money credits
 */
 
-void login_register(int choose) {
+User *login_register(int choose) {
     ListUser Players;
-    string user, pass, repass, read_from_file, users, passe; 
+    User *for_return;
+    std::string user, pass, repass, read_from_file, users, passe; 
     int flag;
-    float money, Money, credits;
+    float money, Money, credits, credit;
     const float STARTER_CREDITS = 20;
     space sp;
     passwordmatch pm;
     numonly nu;
     
-    cin.clear();
-    cin.ignore(256,'\n');
+    std::cin.clear();
+    std::cin.ignore(256,'\n');
     // system("cls||clear");
     switch(choose) {
         //register 
         case 1 : {
-            ofstream opened;
-            opened.open("Total.txt", fstream::app);
+            std::ofstream opened;
+            opened.open("Total.txt", std::fstream::app);
             opened.close();
-            cout << "------------------------------------------------------------------------------------" << endl;
-            cout << "\t\t\t\t\tRegister" << endl;
-            cout << "------------------------------------------------------------------------------------" << endl;
+            std::cout << "------------------------------------------------------------------------------------" << std::endl;
+            std::cout << "\t\t\t\t\tRegister" << std::endl;
+            std::cout << "------------------------------------------------------------------------------------" << std::endl;
 
             do { // username that user entered has already been taken or not.
                 flag = 0;
-                fstream file("Total.txt");
+                std::fstream file("Total.txt");
                 try {
                     fill_info("username : ", user); //fil_info for check user has space or not.
                     while(!file.eof()) {
                         getline(file, read_from_file);
-                        istringstream ss(read_from_file);
+                        std::istringstream ss(read_from_file);
                         ss >> users >> passe;
                         if(user == users) {
                             throw "username has already been taken.";
@@ -41,7 +42,7 @@ void login_register(int choose) {
                     }
                 } catch (const char *&e) {
                     flag = 1;
-                    cout << e << endl;
+                    std::cout << e << std::endl;
                 }
                 file.close();
             } while (flag); 
@@ -50,34 +51,34 @@ void login_register(int choose) {
             do { // check password = re-password ???
                 flag = 0;
                 try {
-                    cout << "reenter password : "; getline(cin, repass);
-                    cin.clear();
+                    std::cout << "reenter password : "; getline(std::cin, repass);
+                    std::cin.clear();
                     if( pass != repass ) {
                         throw pm;
                     }
                 } catch (passwordmatch &e) { 
                     flag = 1;
-                    cout << e.what() << endl;
+                    std::cout << e.what() << std::endl;
                 }
             } while (flag);
 
             do { //insert money.
                 flag = 0;
                 try {
-                    cout << "money : "; cin >> money;
-                    if(cin.fail()) {
-                        cin.clear();
-                        cin.ignore(256,'\n');
+                    std::cout << "money : "; std::cin >> money;
+                    if(std::cin.fail()) {
+                        std::cin.clear();
+                        std::cin.ignore(256,'\n');
                         throw nu;
                     }
                 } catch (numonly &e) {
                     flag = 1;
-                    cout << e.what() << endl;
+                    std::cout << e.what() << std::endl;
                 }
             } while (flag);
 
-            opened.open("Total.txt", fstream::app);
-            opened << user << ' ' << pass << ' ' << money << ' ' << STARTER_CREDITS << endl;
+            opened.open("Total.txt", std::fstream::app);
+            opened << user << ' ' << pass << ' ' << money << ' ' << STARTER_CREDITS << std::endl;
             opened.close();
 
         } break;
@@ -85,24 +86,24 @@ void login_register(int choose) {
         case 2 : {
             int count = 3; //if user entered username or password incorrect 3 times, program will terminate.
             bool user_correct;
-            cout << "------------------------------------------------------------------------------------" << endl;
-            cout << "\t\t\t\t\tLogin" << endl;
-            cout << "------------------------------------------------------------------------------------" << endl;
+            std::cout << "------------------------------------------------------------------------------------" << std::endl;
+            std::cout << "\t\t\t\t\tLogin" << std::endl;
+            std::cout << "------------------------------------------------------------------------------------" << std::endl;
             do {
-                fstream file("Total.txt");
+                std::fstream file("Total.txt");
                 flag = 0;
-                cout << "username : "; getline(cin, user);
-                cout << "password : "; getline(cin, pass);
+                std::cout << "username : "; getline(std::cin, user);
+                std::cout << "password : "; getline(std::cin, pass);
 
                 while(!file.eof()) {
                     getline(file, read_from_file);
-                    istringstream ss(read_from_file);
-                    ss >> users >> passe;
+                    std::istringstream ss(read_from_file);
+                    ss >> users >> passe >> money >> credits;
                     if(users != user) {
                         if(!file.eof()) continue;
                         count--;
                         flag = 1;
-                        cerr << "The username that you entered isn't connected to an account." << " (" << count << " times left)" << endl;
+                        std::cerr << "The username that you entered isn't connected to an account." << " (" << count << " times left)" << std::endl;
                     } else {
                         user_correct = true;
                         break;
@@ -111,7 +112,7 @@ void login_register(int choose) {
                     if(passe != pass) {
                         count--;
                         flag = 1;
-                        cerr << "The password that you have entered is incorrect." << " (" << count << " times left)" << endl;
+                        std::cerr << "The password that you have entered is incorrect." << " (" << count << " times left)" << std::endl;
                     }
                 }
 
@@ -120,18 +121,22 @@ void login_register(int choose) {
             } while (flag);
         } break;
 
-        default : cout << "eiei" << endl;
+        default : std::cout << "eiei" << std::endl;
     }
 
+
     /* insert users in LL. */
-    ifstream insert_ll("Total.txt");
+    std::ifstream insert_ll("Total.txt");
     while(!insert_ll.eof()) {
-        getline(insert_ll, read_from_file);
+        std::getline(insert_ll, read_from_file);
         if(read_from_file.length() == 0) continue;
-        istringstream ss(read_from_file);
-        ss >> users >> passe >> Money >> credits;
-        Players.insert(users, Money, credits);
+        std::istringstream ss(read_from_file);
+        ss >> users >> passe >> Money >> credit;
+        Players.insert(users, Money, credit);
     }
     insert_ll.close();
 
+    for_return = Players.find_node(user);
+
+    return for_return;
 }

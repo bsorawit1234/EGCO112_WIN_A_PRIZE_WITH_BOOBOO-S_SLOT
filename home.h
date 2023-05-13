@@ -1,60 +1,60 @@
 #include "game.h"
 
-void status(User &player) {
+void status(User *&player) {
   clear_screen();
-  cout << "-------- HOME ---------" << endl;
-  cout << "  User    : " << player.name << endl;
-  cout << "  Money   : " << player.get_money() << endl;
-  cout << "  Credits : " << player.get_credits() << endl;
-  cout << "-----------------------" << endl;
+  std::cout << "-------- HOME ---------" << std::endl;
+  std::cout << "  User    : " << player->name << std::endl;
+  std::cout << "  Money   : " << player->get_money() << std::endl;
+  std::cout << "  Credits : " << player->get_credits() << std::endl;
+  std::cout << "-----------------------" << std::endl;
 }
 
-void deposit(User &player) {
+void deposit(User *&player) {
   status(player);
   int check_d = 1, check_m = 1;
   char m;
   float d;
-  cout << "        DEPOSIT" << endl;
-  cout << "How much do you want to deposit?" << endl;
+  std::cout << "        DEPOSIT" << std::endl;
+  std::cout << "How much do you want to deposit?" << std::endl;
   while(check_d) {
     try {
-      cout << ": ";
-      cin >> d;
-      if(cin.fail()) {
-        cin.clear();
-        cin.ignore(256, '\n');
+      std::cout << ": ";
+      std::cin >> d;
+      if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
         throw "ONLY NUMBER!!!";
       }
-      if(d > player.get_money()) {
-        cin.clear();
-        cin.ignore(256, '\n');
+      if(d > player->get_money()) {
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
         throw "You don't have enough money to deposit";
       }
       check_d = 0;
     } catch(const char* s) {
-      cout << endl << s << endl << endl;
+      std::cout << std::endl << s << std::endl << std::endl;
     }
   }
 
-  player.deposit(d);
+  player->deposit(d);
   status(player);
-  cout << endl << player.name << " deposited " << d << "$" << endl;
+  std::cout << std::endl << player->name << " deposited " << d << "$" << std::endl;
   
-  if(player.get_money() == 0) return;
-  cout << endl << "Do you want to deposit more?" << endl;
+  if(player->get_money() == 0) return;
+  std::cout << std::endl << "Do you want to deposit more?" << std::endl;
   while(check_m) {
     try {
-      cout << "(Y/N) : ";
-      cin >> m;
+      std::cout << "(Y/N) : ";
+      std::cin >> m;
       m = tolower(m);
       if(m != 'y' && m != 'n') {
-        cin.clear();
-        cin.ignore(256, '\n');
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
         throw "ONLY Y AND N !!!";
       }
       check_m = 0;
     } catch(const char* s) {
-      cout << endl << s << endl;
+      std::cout << std::endl << s << std::endl;
     }
   }
   if(m == 'y') {
@@ -62,52 +62,52 @@ void deposit(User &player) {
   }
 }
 
-void withdraw(User &player) {
+void withdraw(User *&player) {
   status(player);
   int check_w = 1, check_m = 1;
   char m;
   float w;
-  cout << "        WITHDRAW" << endl;
-  cout << "How much do you want to withdraw?" << endl;
+  std::cout << "        WITHDRAW" << std::endl;
+  std::cout << "How much do you want to withdraw?" << std::endl;
   while(check_w) {
     try {
-      cout << ": ";
-      cin >> w;
-      if(cin.fail()) {
-        cin.clear();
-        cin.ignore(256, '\n');
+      std::cout << ": ";
+      std::cin >> w;
+      if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
         throw "ONLY NUMBER!!!";
       }
-      if(w > player.get_credits()) {
-        cin.clear();
-        cin.ignore(256, '\n');
+      if(w > player->get_credits()) {
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
         throw "You don't have enough credits to withdraw";
       }
       check_w = 0;
     } catch(const char* s) {
-      cout << endl << s << endl << endl;
+      std::cout << std::endl << s << std::endl << std::endl;
     }
   }
 
-  player.withdraw(w);
+  player->withdraw(w);
   status(player);
-  cout << endl << player.name << " withdrew " << w << "$" << endl;
+  std::cout << std::endl << player->name << " withdrew " << w << "$" << std::endl;
   
-  if(player.get_credits() == 0) return;
-  cout << endl << "Do you want to withdraw more?" << endl;
+  if(player->get_credits() == 0) return;
+  std::cout << std::endl << "Do you want to withdraw more?" << std::endl;
   while(check_m) {
     try {
-      cout << "(Y/N) : ";
-      cin >> m;
+      std::cout << "(Y/N) : ";
+      std::cin >> m;
       m = tolower(m);
       if(m != 'y' && m != 'n') {
-        cin.clear();
-        cin.ignore(256, '\n');
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
         throw "ONLY Y AND N !!!";
       }
       check_m = 0;
     } catch(const char* s) {
-      cout << endl << s << endl;
+      std::cout << std::endl << s << std::endl;
     }
   }
   if(m == 'y') {
@@ -115,55 +115,55 @@ void withdraw(User &player) {
   }
 }
 
-void home(User &player) {
+void home(User *&player) {
   int choice, check_choice = 1;
   status(player);
-  cout << "   1. PLAY" << endl;
-  cout << "   2. DEPOSIT" << endl;
-  cout << "   3. WITHDRAW" << endl;
-  cout << "   4. LOGOUT" << endl;
+  std::cout << "   1. PLAY" << std::endl;
+  std::cout << "   2. DEPOSIT" << std::endl;
+  std::cout << "   3. WITHDRAW" << std::endl;
+  std::cout << "   4. LOGOUT" << std::endl;
   while(check_choice) {
     try {
-      cout << "choice: ";
-      cin >> choice;
-      if(cin.fail()) {
-        cin.clear();
-        cin.ignore(256, '\n');
+      std::cout << "choice: ";
+      std::cin >> choice;
+      if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
         throw "ONLY NUMBER !!!";
       }
       if(choice < 1 || choice > 4) {
-        cin.clear();
-        cin.ignore(256, '\n');
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
         throw "CHOICE BETWEEN 1-4";
       }
       check_choice = 0;
     } catch(const char* s) {
-      cout << endl << s << endl << endl;
+      std::cout << std::endl << s << std::endl << std::endl;
     }
   }
   
   switch(choice) {
     case 1:
-      if(player.get_credits() > 0) {
+      if(player->get_credits() > 0) {
         game(player);
       } else {
         int check_h = 1;
         char h;
-        cout << "Your credits is not enough to play slot" << endl;
-        cout << "Type H for back to home" << endl;
+        std::cout << "Your credits is not enough to play slot" << std::endl;
+        std::cout << "Type H for back to home" << std::endl;
         while(check_h) {
           try {
-            cout << ": ";
-            cin >> h;
+            std::cout << ": ";
+            std::cin >> h;
             h = tolower(h);
             if(h != 'h') {
-              cin.clear();
-              cin.ignore(256, '\n');
+              std::cin.clear();
+              std::cin.ignore(256, '\n');
               throw "ONLY H !!!";
             }
             check_h = 0;
           } catch(const char* s) {
-            cout << endl << s << endl << endl;
+            std::cout << std::endl << s << std::endl << std::endl;
           }
         }
       }

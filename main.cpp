@@ -6,29 +6,29 @@
 #include <exception>
 #include <sstream>
 
-using namespace std;
+//using namespace std;
 
 #include "ListUser.h"
 #include "excep_tion.h"
 #include "login_register.h"
 #include "home.h"
 
-void start(User &player) {
+void start(User *player) {
   int choose, check_choose = 1;
   clear_screen();
-  cout << "GAME NAME" << endl;
-  cout << "1. REGISTER" << endl;
-  cout << "2. LOGIN" << endl;
-  cout << "3. EXIT" << endl;
+  std::cout << "GAME NAME" << std::endl;
+  std::cout << "1. REGISTER" << std::endl;
+  std::cout << "2. LOGIN" << std::endl;
+  std::cout << "3. EXIT" << std::endl;
 
   while(check_choose) {
     try {
-      cout << "choose: ";
-      cin >> choose;
+      std::cout << "choose: ";
+      std::cin >> choose;
       
-      if(cin.fail()) {
-        cin.clear();
-        cin.ignore(256,'\n');
+      if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(256,'\n');
         throw "ONLY NUMBER !!";
       }
 
@@ -37,16 +37,16 @@ void start(User &player) {
       }
       check_choose = 0;
     } catch(const char* s) {
-      cout << endl << s << endl << endl;
+      std::cout << std::endl << s << std::endl << std::endl;
     }
   }
 
   switch(choose) {
     case 1:
-      login_register(1);
+      player = login_register(1);
       break;
     case 2:
-      login_register(2);
+      player = login_register(2);
       break;
     case 3:
       // return;
@@ -54,11 +54,15 @@ void start(User &player) {
       start(player);
       break;
   }
+  // for testing after adjusting return type of login_register function. 
+  home(player);
+  start(player);
 }
 
 int main() {
   srand(time(NULL));
 
   User u1("boom", 5000, 5000); // for testing
-  start(u1);
+  User* u2;
+  start(u2);
 }
