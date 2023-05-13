@@ -30,6 +30,11 @@ void deposit(User *&player) {
         std::cin.ignore(256, '\n');
         throw "You don't have enough money to deposit";
       }
+      if(d < 100) {
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
+        throw "minimum deposit is 100$";
+      }
       check_d = 0;
     } catch(const char* s) {
       std::cout << std::endl << s << std::endl << std::endl;
@@ -82,6 +87,11 @@ void withdraw(User *&player) {
         std::cin.clear();
         std::cin.ignore(256, '\n');
         throw "You don't have enough credits to withdraw";
+      }
+      if(w < 100) {
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
+        throw "minimum withdraw is 100$";
       }
       check_w = 0;
     } catch(const char* s) {
@@ -144,16 +154,15 @@ void home(User *&player) {
   
   switch(choice) {
     case 1:
-      if(player->get_credits() > 0) {
+      if(player->get_credits() >= 100) {
         game(player);
       } else {
         int check_h = 1;
         char h;
-        std::cout << "Your credits is not enough to play slot" << std::endl;
-        std::cout << "Type H for back to home" << std::endl;
+        std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS 100$" << std::endl;
         while(check_h) {
           try {
-            std::cout << ": ";
+            std::cout << "PRESS H TO CONTINUE: ";
             std::cin >> h;
             h = tolower(h);
             if(h != 'h') {
@@ -170,11 +179,53 @@ void home(User *&player) {
       home(player);
       break;
     case 2:
-      deposit(player);
+      if(player->get_money() >= 100) {
+        deposit(player);
+      } else {
+        int check_h = 1;
+        char h;
+        std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS 100$" << std::endl;
+        while(check_h) {
+          try {
+            std::cout << "PRESS H TO CONTINUE: ";
+            std::cin >> h;
+            h = tolower(h);
+            if(h != 'h') {
+              std::cin.clear();
+              std::cin.ignore(256, '\n');
+              throw "ONLY H !!!";
+            }
+            check_h = 0;
+          } catch(const char* s) {
+            std::cout << std::endl << s << std::endl << std::endl;
+          }
+        }
+      }
       home(player);
       break;
     case 3:
-      withdraw(player);
+    if(player->get_credits() >= 100) {
+        withdraw(player);
+      } else {
+        int check_h = 1;
+        char h;
+        std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS 100$" << std::endl;
+        while(check_h) {
+          try {
+            std::cout << "PRESS H TO CONTINUE: ";
+            std::cin >> h;
+            h = tolower(h);
+            if(h != 'h') {
+              std::cin.clear();
+              std::cin.ignore(256, '\n');
+              throw "ONLY H !!!";
+            }
+            check_h = 0;
+          } catch(const char* s) {
+            std::cout << std::endl << s << std::endl << std::endl;
+          }
+        }
+      }
       home(player);
       break;
   }
