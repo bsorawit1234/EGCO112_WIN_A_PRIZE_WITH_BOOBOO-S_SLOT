@@ -6,19 +6,19 @@
 #include <exception>
 #include <sstream>
 
-#include <chrono>
-#include <thread>  
-
-// using namespace std;
-
 #include "ListUser.h"
 #include "excep_tion.h"
 #include "login_register.h"
 #include "home.h"
+#include "Admin.h"
 
-void start(User *player) {
-  User *t;
+void start() {
+  ListUser Players;
+  User *player;
   int choose, check_choose = 1;
+  std::string user, users, passe, read_from_file;
+  float Money, credit;
+
   clear_screen();
 
   std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
@@ -51,29 +51,39 @@ void start(User *player) {
     }
   }
 
+  clear_screen();
+  
   switch(choose) {
     case 1:
-      t = login_register(1);
-      home(t);
-      start(t);
+      user = login_register(1);
       break;
     case 2:
-      t = login_register(2);
-      home(t);
-      start(t);
+      user = login_register(2);
       break;
     case 3:
-      // return;
-      home(player);
-      start(player);
-      break;
+      return;
   }
+
+  std::ifstream insert_ll("Total.txt");
+  while(!insert_ll.eof()) {
+    std::getline(insert_ll, read_from_file);
+    if(read_from_file.length() == 0) continue;
+    std::istringstream ss(read_from_file);
+    ss >> users >> passe >> Money >> credit;
+    Players.insert(users, Money, credit);
+  }
+  insert_ll.close();
+  
+  player = Players.find_node(user);
+
+  home(player);
+  start();
 }
 
 void intro() {
   clear_screen();
   
-  msleep(2000);
+  msleep(800);
   std::cout << "      __    __  __  __  ___          _          __ ___   __  __   __  ______   __  __" << std::endl;
   std::cout << "     |  |  |  ||  ||  \\|   |        / \\        |  |\\   \\|  |\\  \\'|  ||___  /  |  |\\  \\" << std::endl;
   std::cout << "     | '|/\\| '|| '|| '|\\  '|      '/  '\\       |  '|/__/| '|/  / | '|   /'/__ |  _''>" << std::endl;
@@ -99,8 +109,5 @@ int main() {
   srand(time(NULL));
 
   intro();
-
-
-  User *u1 = new User("boom", 5000, 5000); // for testing
-  start(u1);
+  start();
 }

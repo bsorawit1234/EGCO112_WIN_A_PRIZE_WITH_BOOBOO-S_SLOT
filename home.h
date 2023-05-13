@@ -1,6 +1,6 @@
 #include "game.h"
 
-void status(User *&player) {
+void status(User *player) {
   clear_screen();
   std::cout << "-------- HOME ---------" << std::endl;
   std::cout << "  User    : " << player->name << std::endl;
@@ -9,7 +9,7 @@ void status(User *&player) {
   std::cout << "-----------------------" << std::endl;
 }
 
-void deposit(User *&player) {
+void deposit(User *player) {
   status(player);
   int check_d = 1, check_m = 1;
   char m;
@@ -67,7 +67,7 @@ void deposit(User *&player) {
   }
 }
 
-void withdraw(User *&player) {
+void withdraw(User *player) {
   status(player);
   int check_w = 1, check_m = 1;
   char m;
@@ -125,7 +125,7 @@ void withdraw(User *&player) {
   }
 }
 
-void home(User *&player) {
+void home(User *player) {
   int choice, check_choice = 1;
   status(player);
   std::cout << "   1. PLAY" << std::endl;
@@ -159,7 +159,8 @@ void home(User *&player) {
       } else {
         int check_h = 1;
         char h;
-        std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS 100$" << std::endl;
+
+        std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS $100" << std::endl;
         while(check_h) {
           try {
             std::cout << "PRESS H TO CONTINUE: ";
@@ -184,7 +185,8 @@ void home(User *&player) {
       } else {
         int check_h = 1;
         char h;
-        std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS 100$" << std::endl;
+
+        std::cout << std::endl << "MINIMUM CREDITS TO DEPOSIT IS $100" << std::endl;
         while(check_h) {
           try {
             std::cout << "PRESS H TO CONTINUE: ";
@@ -209,7 +211,8 @@ void home(User *&player) {
       } else {
         int check_h = 1;
         char h;
-        std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS 100$" << std::endl;
+
+        std::cout << std::endl << "MINIMUM CREDITS TO WITHDRAW IS $100" << std::endl;
         while(check_h) {
           try {
             std::cout << "PRESS H TO CONTINUE: ";
@@ -228,5 +231,27 @@ void home(User *&player) {
       }
       home(player);
       break;
+    case 4: {
+      std::string for_read, for_write, target, pass;
+      std::ifstream read("Total.txt");
+      std::ofstream write;
+      write.open("Total2.txt", std::fstream::app);
+      while(!read.eof()) {
+        std::getline(read, for_read);
+        if(for_read.length() == 0) continue;
+        std::istringstream ss(for_read);
+        ss >> target >> pass;
+        if(target == player->name) {
+          write << player->name << ' ' << pass << ' ' << player->get_money() << ' ' << player->get_credits() << std::endl;
+        } else {
+          write << for_read << std::endl;
+        }
+      }
+      write.close();
+      read.close();
+      remove("Total.txt");
+      rename("Total2.txt", "Total.txt");
+
+    }
   }
 }

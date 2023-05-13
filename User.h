@@ -1,5 +1,5 @@
 class User {
-  private:
+  protected:
     float money;
     float credits;
   public:
@@ -9,13 +9,11 @@ class User {
     User(std::string = "Tee", float = 0, float = 0);
     ~User();
     void withdraw(float);
-    void deposit(float);
+    virtual void deposit(float);
     float get_credits() { return credits; }
     float get_money() { return money; }
     void bet(float);
-    void operator=(User);
-    void copy_location(User *, User *);
-    void topup_money(float);
+    void topup(float);
 };
 
 User::User(std::string n, float m, float c) {
@@ -52,16 +50,15 @@ void User::bet(float b) {
   credits += b;
 }
 
-void User::operator=(User B) {
-  name = B.name;
-  money = B.money;
-  credits = B.credits;
-}
-
-void User::copy_location(User *A, User *B) {
-  A = B;
-}
-
-void User::topup_money(float t) {
+void User::topup(float t) {
   money += t;
 }
+
+class VIP: public User {
+  virtual void deposit(float d) {
+    if(money >= d) {
+      credits += d*1.1;
+      money -= d;
+    }
+  }
+};
