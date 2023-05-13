@@ -87,7 +87,7 @@ void start(User *player) {
 void intro() {
   clear_screen();
   
-  msleep(2000);
+  msleep(800);
   std::cout << "      __    __  __  __  ___          _          __ ___   __  __   __  ______   __  __" << std::endl;
   std::cout << "     |  |  |  ||  ||  \\|   |        / \\        |  |\\   \\|  |\\  \\'|  ||___  /  |  |\\  \\" << std::endl;
   std::cout << "     | '|/\\| '|| '|| '|\\  '|      '/  '\\       |  '|/__/| '|/  / | '|   /'/__ |  _''>" << std::endl;
