@@ -159,6 +159,7 @@ void home(User *player) {
       } else {
         int check_h = 1;
         char h;
+
         std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS $100" << std::endl;
         while(check_h) {
           try {
@@ -184,6 +185,7 @@ void home(User *player) {
       } else {
         int check_h = 1;
         char h;
+
         std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS $100" << std::endl;
         while(check_h) {
           try {
@@ -209,6 +211,7 @@ void home(User *player) {
       } else {
         int check_h = 1;
         char h;
+
         std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS $100" << std::endl;
         while(check_h) {
           try {

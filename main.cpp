@@ -10,7 +10,6 @@
 #include <thread>  
 
 // using namespace std;
-// using namespace std;
 
 #include "ListUser.h"
 #include "excep_tion.h"
