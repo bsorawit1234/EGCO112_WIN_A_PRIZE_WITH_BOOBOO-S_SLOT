@@ -22,10 +22,10 @@ class ListUser{
               size--;
           }
       }
-      cout << "LL has been destructor." << endl;
+      std::cout << "LL has been destructor." << std::endl;
     }
 
-    void insert(string n, float m, float c) {
+    void insert(std::string n, float m, float c) {
       User *newUser = new User(n, m, c);
 
       if(head == NULL) {
@@ -43,9 +43,20 @@ class ListUser{
     void display() {
       User *t = head;
       while(t != NULL) {
-        cout << t->name << endl;
+        std::cout << t->name << std::endl;
         t = t->next;
       }
+    }
+
+    User* find_node(std::string &n) {
+      User* temp = head;
+      while(temp) {
+        if(temp->name == n) {
+          break;
+        }
+        temp = temp->next;
+      }
+      return temp;
     }
 
 };
