@@ -10,6 +10,7 @@
 #include <thread>  
 
 // using namespace std;
+// using namespace std;
 
 #include "ListUser.h"
 #include "excep_tion.h"
@@ -34,11 +35,26 @@ void start(User *player) {
   std::cout << " " << std::endl;
   std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
 
+  std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
+  std::cout << "       WELCOME TO WIN A PRIZE WITH BOO BOO'S SLOT      " << std::endl;
+  std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
+  std::cout << " " << std::endl;
+  std::cout << "                   PRESS 1 TO REGISTER                " << std::endl;
+  std::cout << "                   PRESS 2 TO LOGIN " << std::endl;
+  std::cout << "                   PRESS 3 TO EXIT GAME" << std::endl;
+  std::cout << " " << std::endl;
+  std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
+
   while(check_choose) {
     try {
       std::cout << "choose: ";
       std::cin >> choose;
+      std::cout << "choose: ";
+      std::cin >> choose;
       
+      if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(256,'\n');
       if(std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(256,'\n');
@@ -51,9 +67,9 @@ void start(User *player) {
       check_choose = 0;
     } catch(const char* s) {
       std::cout << std::endl << s << std::endl << std::endl;
+      std::cout << std::endl << s << std::endl << std::endl;
     }
   }
-
   clear_screen();
   
   switch(choose) {
@@ -84,42 +100,37 @@ void start(User *player) {
 
 }
 
+void intro() {
+  clear_screen();
+  
+  msleep(2000);
+  std::cout << "      __    __  __  __  ___          _          __ ___   __  __   __  ______   __  __" << std::endl;
+  std::cout << "     |  |  |  ||  ||  \\|   |        / \\        |  |\\   \\|  |\\  \\'|  ||___  /  |  |\\  \\" << std::endl;
+  std::cout << "     | '|/\\| '|| '|| '|\\  '|      '/  '\\       |  '|/__/| '|/  / | '|   /'/__ |  _''>" << std::endl;
+  std::cout << "     |__,/\\'__||__||__|'|__|      /_____\\      |__|    '|__|'\\__\\|__|''/_____/|__|/__/  )" << std::endl;
+
+  msleep(1200);
+  std::cout << "                             __    __  __  ________  __    __" << std::endl;;
+  std::cout << "                            |  |  |  ||  ||__    __||_ |  | _|" << std::endl;;
+  std::cout << "                            | '|/\\| '|| '|   | '|  ' | ';=; |" << std::endl;;
+  std::cout << "                            |__,/\\'__||__|  '|__|'''|__|  |__| )" << std::endl;
+
+  msleep(1200);
+  std::cout << " __  __    ____     ____        __  __    ____     ____       ______       ______  __       ____    ________" << std::endl;
+  std::cout << "|  |\\  \\ /  /\\  \\'/  /\\  \\'    |  |\\  \\ /  /\\  \\'/  /\\  \\'   /  /\\__\\     /  /\\__\\|  |   '/  /\\  \\'|__    __|" << std::endl;
+  std::cout << "| '|( '(|  |  | '|| |  | '|    | '|( '(|  |  | '|| |  | '|  _\\  \\''      _\\  \\''  | '|__ |  |  | '|   | '| '" << std::endl;
+  std::cout << "|__|/__/ \\__\\/__/'\\__\\/__/'    |__|/__/ \\__\\/__/'\\__\\/__/' \\__\\/__/     \\__\\/__/  |_____| \\__\\/__/'  '|__|''" << std::endl;
+  
+  msleep(3000);
+  clear_screen();
+}
+
 int main() {
   srand(time(NULL));
 
-  //this_thread::sleep_for(chrono::milliseconds(2000));
-     
-    /*cout << R"(
-                    __    __  __  __  ___          _          __ ___   __  __   __  ______   __  __
-                   |  |  |  ||  ||  \|   |        / \        |  |\   \|  |\  \'|  ||___  /  |  |\  \  
-                   | '|/\| '|| '|| '|\  '|      '/  '\       |  '|/__/| '|/  / | '|   /'/__ |  _''>
-                   |__,/\'__||__||__|'|__|      /_____\      |__|    '|__|'\__\|__|''/_____/|__|/__/  )" <<endl;
-
-    this_thread::sleep_for(chrono::milliseconds(1200));
-
-    cout << R"(
-                                      __    __  __  ________  __    __
-                                     |  |  |  ||  ||__    __||_ |  | _| 
-                                     | '|/\| '|| '|   | '|  ' | ';=; |
-                                     |__,/\'__||__|  '|__|'''|__|  |__| )" <<endl;
+  intro();
 
 
-    this_thread::sleep_for(chrono::milliseconds(1200));
-
-    cout << R"(
-     __  __    ____     ____        __  __    ____     ____       ______       ______  __       ____    ________
-    |  |\  \ /  /\  \'/  /\  \'    |  |\  \ /  /\  \'/  /\  \'   /  /\__\     /  /\__\|  |   '/  /\  \'|__    __|
-    | '|( '(|  |  | '|| |  | '|    | '|( '(|  |  | '|| |  | '|  _\  \''      _\  \''  | '|__ |  |  | '|   | '| '
-    |__|/__/ \__\/__/'\__\/__/'    |__|/__/ \__\/__/'\__\/__/' \__\/__/     \__\/__/  |_____| \__\/__/'  '|__|''  
-    
-     )" <<endl;
-     
-    this_thread::sleep_for(chrono::milliseconds(3000));
-
-    clear_screen();*/
-
-
-  User u1("boom", 5000, 5000); // for testing
-  User* u2;
-  start(u2);
+  User *u1 = new User("boom", 5000, 5000); // for testing
+  start(u1);
 }
