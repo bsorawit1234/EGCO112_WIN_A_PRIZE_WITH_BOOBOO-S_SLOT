@@ -16,13 +16,13 @@ class ListUser{
       User *temp = head;
       while(size != 0){
           if(temp != NULL){
-               temp = head->next;
-               delete(head);
-               head = temp;
-               size--;
+              temp = head->next;
+              delete(head);
+              head = temp;
+              size--;
           }
       }
-     cout << "LL has been destructor." << endl;
+      cout << "LL has been destructor." << endl;
     }
 
     void insert(string n, float m, float c) {
