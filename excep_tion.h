@@ -36,7 +36,7 @@ class my_username : public std::exception {
 class min_money : public std::exception {
     public : 
         virtual const char* what() const throw() {
-            return "";
+            return "Minimum opening account $100.";
         }
 };
 

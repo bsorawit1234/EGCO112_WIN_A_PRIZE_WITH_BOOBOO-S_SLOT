@@ -73,7 +73,7 @@ void slot_game(float bet, std::string s[], User *&player) {
   }
 }
 
-void game(User *&player) {
+void game(User *player) {
   int check_bet = 1, check_choice = 1;
   std::string s[3] = {"0", "0", "0"};
   print_slot(s[0], s[1], s[2]);
@@ -93,7 +93,7 @@ void game(User *&player) {
         throw "YOU DON'T HAVE ENOUGH CREDITS.";
       }
       if(bet < 100) {
-        throw "MINIMUM CREDITS TO PLAY SLOT IS 100$";
+        throw "MINIMUM CREDITS TO PLAY SLOT IS $100";
       }
       check_bet = 0;
     } catch(char const* s) {
