@@ -15,6 +15,7 @@ class User {
     void bet(float);
     void operator=(User);
     void copy_location(User *, User *);
+    void topup_money(float);
 };
 
 User::User(std::string n, float m, float c) {
@@ -59,4 +60,8 @@ void User::operator=(User B) {
 
 void User::copy_location(User *A, User *B) {
   A = B;
+}
+
+void User::topup_money(float t) {
+  money += t;
 }

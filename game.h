@@ -44,7 +44,7 @@ void check_result_slot(int n1, int n2, int n3, float &bet) {
 void slot_game(float bet, std::string s[], User *&player) {
   print_slot(s[0], s[1], s[2]);
 
-  int n[3] = {rand() % 10, rand() % 10, rand() % 1};
+  int n[3] = {rand() % 10, rand() % 10, rand() % 10};
   for(int i = 0; i < 3; i++) {
     for(int j = 0; j < 10; j++) {
       n[i]++;

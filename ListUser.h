@@ -48,7 +48,7 @@ class ListUser{
       }
     }
 
-    User* find_node(std::string &n) {
+    User* find_node(std::string n) {
       User* temp = head;
       while(temp) {
         if(temp->name == n) {
