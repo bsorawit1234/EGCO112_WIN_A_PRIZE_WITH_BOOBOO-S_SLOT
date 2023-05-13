@@ -17,9 +17,10 @@
 #include "home.h"
 
 void start(User *player) {
-
+  ListUser Players;
   int choose, check_choose = 1;
-  std::string user;
+  std::string user, users, passe, read_from_file;
+  float Money, credit;
 
   clear_screen();
 
@@ -53,6 +54,8 @@ void start(User *player) {
     }
   }
 
+  clear_screen();
+  
   switch(choose) {
     case 1:
       user = login_register(1);
@@ -79,16 +82,14 @@ void start(User *player) {
   home(player);
   start(player);
 
-  }
-  round++;
 }
 
 int main() {
   srand(time(NULL));
 
-  this_thread::sleep_for(chrono::milliseconds(2000));
+  //this_thread::sleep_for(chrono::milliseconds(2000));
      
-    cout << R"(
+    /*cout << R"(
                     __    __  __  __  ___          _          __ ___   __  __   __  ______   __  __
                    |  |  |  ||  ||  \|   |        / \        |  |\   \|  |\  \'|  ||___  /  |  |\  \  
                    | '|/\| '|| '|| '|\  '|      '/  '\       |  '|/__/| '|/  / | '|   /'/__ |  _''>
@@ -115,9 +116,10 @@ int main() {
      
     this_thread::sleep_for(chrono::milliseconds(3000));
 
-    clear_screen();
+    clear_screen();*/
 
 
   User u1("boom", 5000, 5000); // for testing
-  start(u1);
+  User* u2;
+  start(u2);
 }
