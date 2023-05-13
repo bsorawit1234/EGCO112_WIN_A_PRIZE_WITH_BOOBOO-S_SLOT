@@ -28,11 +28,11 @@ class ListUser{
     void insert(std::string n, float m, float c) {
       User *newUser = new User(n, m, c);
 
-      if(head == NULL) {
+      if(head == nullptr) {
         head = newUser;
       } else {
         User *current = head;
-        while(current->next != NULL) {
+        while(current->next != nullptr) {
           current = current->next;
         }
         current->next = newUser;
@@ -52,11 +52,11 @@ class ListUser{
       User* temp = head;
       while(temp) {
         if(temp->name == n) {
-          break;
+          return temp;
         }
         temp = temp->next;
       }
-      return temp;
+      return nullptr;
     }
 
 };

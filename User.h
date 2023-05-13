@@ -13,8 +13,6 @@ class User {
     float get_credits() { return credits; }
     float get_money() { return money; }
     void bet(float);
-    void operator=(User);
-    void copy_location(User *, User *);
 };
 
 User::User(std::string n, float m, float c) {
@@ -49,14 +47,4 @@ void User::deposit(float d) {
 
 void User::bet(float b) {
   credits += b;
-}
-
-void User::operator=(User B) {
-  name = B.name;
-  money = B.money;
-  credits = B.credits;
-}
-
-void User::copy_location(User *A, User *B) {
-  A = B;
 }

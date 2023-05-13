@@ -69,11 +69,11 @@ void slot_game(float bet, std::string s[], User *&player) {
   if(bet >= 0) {
     std::cout << std::endl << "Congrats! You got " << bet << "$" << std::endl;
   } else {
-    std::cout << std::endl <<"Sorry! You lose " << abs(bet) << "$" << std::endl;
+    std::cout << std::endl <<"Sorry! You lose " << bet*(-1) << "$" << std::endl;
   }
 }
 
-void game(User *&player) {
+void game(User *player) {
   int check_bet = 1, check_choice = 1;
   std::string s[3] = {"0", "0", "0"};
   print_slot(s[0], s[1], s[2]);
@@ -92,9 +92,12 @@ void game(User *&player) {
       if(player->get_credits() < bet) {
         throw "YOU DON'T HAVE ENOUGH CREDITS.";
       }
+      if(bet < 100) {
+        throw "MINIMUM CREDITS TO PLAY SLOT IS $100";
+      }
       check_bet = 0;
     } catch(char const* s) {
-      std::cout << s << std::endl;
+      std::cout << std::endl << s << std::endl << std::endl;
     }
   }
 
@@ -119,11 +122,10 @@ void game(User *&player) {
     }
     if(choice == 'y') game(player);
   } else {
-    std::cout << std::endl << "Your credits is not enough to play slot" << std::endl;
-    std::cout << "Type H for back to home" << std::endl;
+    std::cout << std::endl << "YOUR CREDITS IS NOT ENOUGH TO PLAY SLOT" << std::endl;
     while(check_choice) {
       try {
-        std::cout << ": ";
+        std::cout << "PRESS H TO BACK HOME: ";
         std::cin >> choice;
         choice = tolower(choice);
         if(choice != 'h') {

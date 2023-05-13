@@ -1,6 +1,6 @@
 #include "game.h"
 
-void status(User *&player) {
+void status(User *player) {
   clear_screen();
   std::cout << "-------- HOME ---------" << std::endl;
   std::cout << "  User    : " << player->name << std::endl;
@@ -9,7 +9,7 @@ void status(User *&player) {
   std::cout << "-----------------------" << std::endl;
 }
 
-void deposit(User *&player) {
+void deposit(User *player) {
   status(player);
   int check_d = 1, check_m = 1;
   char m;
@@ -29,6 +29,11 @@ void deposit(User *&player) {
         std::cin.clear();
         std::cin.ignore(256, '\n');
         throw "You don't have enough money to deposit";
+      }
+      if(d < 100) {
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
+        throw "minimum deposit is 100$";
       }
       check_d = 0;
     } catch(const char* s) {
@@ -62,7 +67,7 @@ void deposit(User *&player) {
   }
 }
 
-void withdraw(User *&player) {
+void withdraw(User *player) {
   status(player);
   int check_w = 1, check_m = 1;
   char m;
@@ -82,6 +87,11 @@ void withdraw(User *&player) {
         std::cin.clear();
         std::cin.ignore(256, '\n');
         throw "You don't have enough credits to withdraw";
+      }
+      if(w < 100) {
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
+        throw "minimum withdraw is 100$";
       }
       check_w = 0;
     } catch(const char* s) {
@@ -115,7 +125,7 @@ void withdraw(User *&player) {
   }
 }
 
-void home(User *&player) {
+void home(User *player) {
   int choice, check_choice = 1;
   status(player);
   std::cout << "   1. PLAY" << std::endl;
@@ -144,16 +154,15 @@ void home(User *&player) {
   
   switch(choice) {
     case 1:
-      if(player->get_credits() > 0) {
+      if(player->get_credits() >= 100) {
         game(player);
       } else {
         int check_h = 1;
         char h;
-        std::cout << "Your credits is not enough to play slot" << std::endl;
-        std::cout << "Type H for back to home" << std::endl;
+        std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS $100" << std::endl;
         while(check_h) {
           try {
-            std::cout << ": ";
+            std::cout << "PRESS H TO CONTINUE: ";
             std::cin >> h;
             h = tolower(h);
             if(h != 'h') {
@@ -170,12 +179,76 @@ void home(User *&player) {
       home(player);
       break;
     case 2:
-      deposit(player);
+      if(player->get_money() >= 100) {
+        deposit(player);
+      } else {
+        int check_h = 1;
+        char h;
+        std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS $100" << std::endl;
+        while(check_h) {
+          try {
+            std::cout << "PRESS H TO CONTINUE: ";
+            std::cin >> h;
+            h = tolower(h);
+            if(h != 'h') {
+              std::cin.clear();
+              std::cin.ignore(256, '\n');
+              throw "ONLY H !!!";
+            }
+            check_h = 0;
+          } catch(const char* s) {
+            std::cout << std::endl << s << std::endl << std::endl;
+          }
+        }
+      }
       home(player);
       break;
     case 3:
-      withdraw(player);
+    if(player->get_credits() >= 100) {
+        withdraw(player);
+      } else {
+        int check_h = 1;
+        char h;
+        std::cout << std::endl << "MINIMUM CREDITS TO PLAY SLOT IS $100" << std::endl;
+        while(check_h) {
+          try {
+            std::cout << "PRESS H TO CONTINUE: ";
+            std::cin >> h;
+            h = tolower(h);
+            if(h != 'h') {
+              std::cin.clear();
+              std::cin.ignore(256, '\n');
+              throw "ONLY H !!!";
+            }
+            check_h = 0;
+          } catch(const char* s) {
+            std::cout << std::endl << s << std::endl << std::endl;
+          }
+        }
+      }
       home(player);
       break;
+    case 4: {
+      std::string for_read, for_write, target, pass;
+      std::ifstream read("Total.txt");
+      std::ofstream write;
+      write.open("Total2.txt", std::fstream::app);
+      while(!read.eof()) {
+        std::getline(read, for_read);
+        if(for_read.length() == 0) continue;
+        std::istringstream ss(for_read);
+        ss >> target >> pass;
+        if(target == player->name) {
+          write << player->name << ' ' << pass << ' ' << player->get_money() << ' ' << player->get_credits() << std::endl;
+        } else {
+          write << for_read << std::endl;
+        }
+      }
+      write.close();
+      read.close();
+      remove("Total.txt");
+      rename("Total2.txt", "Total.txt");
+
+    }
   }
 }

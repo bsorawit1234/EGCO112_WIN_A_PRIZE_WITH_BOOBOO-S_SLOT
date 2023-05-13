@@ -6,7 +6,10 @@
 #include <exception>
 #include <sstream>
 
-//using namespace std;
+#include <chrono>
+#include <thread>  
+
+// using namespace std;
 
 #include "ListUser.h"
 #include "excep_tion.h"
@@ -14,12 +17,20 @@
 #include "home.h"
 
 void start(User *player) {
+  User *t;
   int choose, check_choose = 1;
+  std::string user;
   clear_screen();
-  std::cout << "GAME NAME" << std::endl;
-  std::cout << "1. REGISTER" << std::endl;
-  std::cout << "2. LOGIN" << std::endl;
-  std::cout << "3. EXIT" << std::endl;
+
+  std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
+  std::cout << "       WELCOME TO WIN A PRIZE WITH BOO BOO'S SLOT      " << std::endl;
+  std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
+  std::cout << " " << std::endl;
+  std::cout << "                   PRESS 1 TO REGISTER                " << std::endl;
+  std::cout << "                   PRESS 2 TO LOGIN " << std::endl;
+  std::cout << "                   PRESS 3 TO EXIT GAME" << std::endl;
+  std::cout << " " << std::endl;
+  std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
 
   while(check_choose) {
     try {
@@ -41,28 +52,43 @@ void start(User *player) {
     }
   }
 
+  ListUser Players;
+  std::string read_from_file, users, passe;
+  float Money, credit;
+
   switch(choose) {
-    case 1:
-      player = login_register(1);
+    case 1: 
+      user = login_register(1);
       break;
     case 2:
-      player = login_register(2);
+      user = login_register(2);
       break;
     case 3:
-      // return;
-      home(player);
-      start(player);
-      break;
+      return;
   }
-  // for testing after adjusting return type of login_register function. 
+
+  std::ifstream insert_ll("Total.txt");
+  while(!insert_ll.eof()) {
+    std::getline(insert_ll, read_from_file);
+    if(read_from_file.length() == 0) continue;
+    std::istringstream ss(read_from_file);
+    ss >> users >> passe >> Money >> credit;
+    Players.insert(users, Money, credit);
+  }
+  insert_ll.close();
+  
+  player = Players.find_node(user);
+
   home(player);
   start(player);
+
 }
 
 int main() {
   srand(time(NULL));
 
-  User u1("boom", 5000, 5000); // for testing
   User* u2;
   start(u2);
+
+  return 0;
 }
