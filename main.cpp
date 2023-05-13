@@ -17,9 +17,10 @@
 #include "home.h"
 
 void start(User *player) {
-  User *t;
+
   int choose, check_choose = 1;
   std::string user;
+
   clear_screen();
 
   std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
@@ -52,12 +53,8 @@ void start(User *player) {
     }
   }
 
-  ListUser Players;
-  std::string read_from_file, users, passe;
-  float Money, credit;
-
   switch(choose) {
-    case 1: 
+    case 1:
       user = login_register(1);
       break;
     case 2:
@@ -82,13 +79,45 @@ void start(User *player) {
   home(player);
   start(player);
 
+  }
+  round++;
 }
 
 int main() {
   srand(time(NULL));
 
-  User* u2;
-  start(u2);
+  this_thread::sleep_for(chrono::milliseconds(2000));
+     
+    cout << R"(
+                    __    __  __  __  ___          _          __ ___   __  __   __  ______   __  __
+                   |  |  |  ||  ||  \|   |        / \        |  |\   \|  |\  \'|  ||___  /  |  |\  \  
+                   | '|/\| '|| '|| '|\  '|      '/  '\       |  '|/__/| '|/  / | '|   /'/__ |  _''>
+                   |__,/\'__||__||__|'|__|      /_____\      |__|    '|__|'\__\|__|''/_____/|__|/__/  )" <<endl;
 
-  return 0;
+    this_thread::sleep_for(chrono::milliseconds(1200));
+
+    cout << R"(
+                                      __    __  __  ________  __    __
+                                     |  |  |  ||  ||__    __||_ |  | _| 
+                                     | '|/\| '|| '|   | '|  ' | ';=; |
+                                     |__,/\'__||__|  '|__|'''|__|  |__| )" <<endl;
+
+
+    this_thread::sleep_for(chrono::milliseconds(1200));
+
+    cout << R"(
+     __  __    ____     ____        __  __    ____     ____       ______       ______  __       ____    ________
+    |  |\  \ /  /\  \'/  /\  \'    |  |\  \ /  /\  \'/  /\  \'   /  /\__\     /  /\__\|  |   '/  /\  \'|__    __|
+    | '|( '(|  |  | '|| |  | '|    | '|( '(|  |  | '|| |  | '|  _\  \''      _\  \''  | '|__ |  |  | '|   | '| '
+    |__|/__/ \__\/__/'\__\/__/'    |__|/__/ \__\/__/'\__\/__/' \__\/__/     \__\/__/  |_____| \__\/__/'  '|__|''  
+    
+     )" <<endl;
+     
+    this_thread::sleep_for(chrono::milliseconds(3000));
+
+    clear_screen();
+
+
+  User u1("boom", 5000, 5000); // for testing
+  start(u1);
 }
