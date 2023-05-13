@@ -6,18 +6,15 @@
 #include <exception>
 #include <sstream>
 
-#include <chrono>
-#include <thread>  
-
-// using namespace std;
-
 #include "ListUser.h"
 #include "excep_tion.h"
 #include "login_register.h"
 #include "home.h"
+#include "Admin.h"
 
-void start(User *player) {
+void start() {
   ListUser Players;
+  User *player;
   int choose, check_choose = 1;
   std::string user, users, passe, read_from_file;
   float Money, credit;
@@ -80,8 +77,7 @@ void start(User *player) {
   player = Players.find_node(user);
 
   home(player);
-  start(player);
-
+  start();
 }
 
 void intro() {
@@ -113,8 +109,5 @@ int main() {
   srand(time(NULL));
 
   intro();
-
-  User u1("boom", 5000, 5000); // for testing
-  User* u2;
-  start(u2);
+  start();
 }
