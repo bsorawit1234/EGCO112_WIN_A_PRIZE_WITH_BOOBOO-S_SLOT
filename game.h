@@ -69,7 +69,7 @@ void slot_game(float bet, std::string s[], User *&player) {
   if(bet >= 0) {
     std::cout << std::endl << "Congrats! You got " << bet << "$" << std::endl;
   } else {
-    std::cout << std::endl <<"Sorry! You lose " << abs(bet) << "$" << std::endl;
+    std::cout << std::endl <<"Sorry! You lose " << bet*(-1) << "$" << std::endl;
   }
 }
 

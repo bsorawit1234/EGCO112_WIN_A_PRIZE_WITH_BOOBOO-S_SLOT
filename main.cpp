@@ -9,72 +9,35 @@
 #include <chrono>
 #include <thread>  
 
-using namespace std;
+// using namespace std;
 
 #include "ListUser.h"
 #include "excep_tion.h"
 #include "login_register.h"
 #include "home.h"
 
-void start(User &player) {
+void start(User *player) {
   int choose, check_choose = 1;
-  int round=0;
   clear_screen();
-  if(round==0){
 
-  cout<<"*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* "<<endl;
-  cout<<"       WELCOME TO WIN A PRIZE WITH BOO BOO'S SLOT      "<<endl;
-  cout<<"*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* "<<endl;
-  cout<<" "<<endl;
-  cout<<"                   PRESS 1 TO REGISTER                "<<endl;
-  cout<<"                   PRESS 2 TO LOGIN "<<endl;
-  cout<<" "<<endl;
-  cout<<"*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* "<<endl;
-
-  while(check_choose) {
-    try {
-      cout << "choose: ";
-      cin >> choose;
-      
-      if(cin.fail()) {
-        cin.clear();
-        cin.ignore(256,'\n');
-        throw "ONLY NUMBER !!";
-      }
-
-      if(choose < 1 || choose > 2) {
-        throw "CHOOSE 1 OR 2";
-      }
-      check_choose = 0;
-    } catch(const char* s) {
-      cout << endl << s << endl << endl;
-    }
-  }
-
-  switch(choose) {
-    case 1:
-      login_register(1);
-      break;
-    case 2:
-      login_register(2);
-      break;
-  }
-  }
-
-  else{
-  cout << "GAME NAME" << endl;
-  cout << "1. REGISTER" << endl;
-  cout << "2. LOGIN" << endl;
-  cout << "3. EXIT" << endl;
+  std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
+  std::cout << "       WELCOME TO WIN A PRIZE WITH BOO BOO'S SLOT      " << std::endl;
+  std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
+  std::cout << " " << std::endl;
+  std::cout << "                   PRESS 1 TO REGISTER                " << std::endl;
+  std::cout << "                   PRESS 2 TO LOGIN " << std::endl;
+  std::cout << "                   PRESS 3 TO EXIT GAME" << std::endl;
+  std::cout << " " << std::endl;
+  std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
 
   while(check_choose) {
     try {
-      cout << "choose: ";
-      cin >> choose;
+      std::cout << "choose: ";
+      std::cin >> choose;
       
-      if(cin.fail()) {
-        cin.clear();
-        cin.ignore(256,'\n');
+      if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(256,'\n');
         throw "ONLY NUMBER !!";
       }
 
@@ -83,7 +46,7 @@ void start(User &player) {
       }
       check_choose = 0;
     } catch(const char* s) {
-      cout << endl << s << endl << endl;
+      std::cout << std::endl << s << std::endl << std::endl;
     }
   }
 
@@ -100,45 +63,43 @@ void start(User &player) {
       start(player);
       break;
   }
-  }
-  round++;
 }
 
 int main() {
   srand(time(NULL));
 
-  this_thread::sleep_for(chrono::milliseconds(2000));
+  // this_thread::sleep_for(chrono::milliseconds(2000));
      
-    cout << R"(
-                    __    __  __  __  ___          _          __ ___   __  __   __  ______   __  __
-                   |  |  |  ||  ||  \|   |        / \        |  |\   \|  |\  \'|  ||___  /  |  |\  \  
-                   | '|/\| '|| '|| '|\  '|      '/  '\       |  '|/__/| '|/  / | '|   /'/__ |  _''>
-                   |__,/\'__||__||__|'|__|      /_____\      |__|    '|__|'\__\|__|''/_____/|__|/__/  )" <<endl;
+  //   cout << R"(
+  //                   __    __  __  __  ___          _          __ ___   __  __   __  ______   __  __
+  //                  |  |  |  ||  ||  \|   |        / \        |  |\   \|  |\  \'|  ||___  /  |  |\  \  
+  //                  | '|/\| '|| '|| '|\  '|      '/  '\       |  '|/__/| '|/  / | '|   /'/__ |  _''>
+  //                  |__,/\'__||__||__|'|__|      /_____\      |__|    '|__|'\__\|__|''/_____/|__|/__/  )" <<endl;
 
-    this_thread::sleep_for(chrono::milliseconds(1200));
+  //   this_thread::sleep_for(chrono::milliseconds(1200));
 
-    cout << R"(
-                                      __    __  __  ________  __    __
-                                     |  |  |  ||  ||__    __||_ |  | _| 
-                                     | '|/\| '|| '|   | '|  ' | ';=; |
-                                     |__,/\'__||__|  '|__|'''|__|  |__| )" <<endl;
+  //   cout << R"(
+  //                                     __    __  __  ________  __    __
+  //                                    |  |  |  ||  ||__    __||_ |  | _| 
+  //                                    | '|/\| '|| '|   | '|  ' | ';=; |
+  //                                    |__,/\'__||__|  '|__|'''|__|  |__| )" <<endl;
 
 
-    this_thread::sleep_for(chrono::milliseconds(1200));
+  //   this_thread::sleep_for(chrono::milliseconds(1200));
 
-    cout << R"(
-     __  __    ____     ____        __  __    ____     ____       ______       ______  __       ____    ________
-    |  |\  \ /  /\  \'/  /\  \'    |  |\  \ /  /\  \'/  /\  \'   /  /\__\     /  /\__\|  |   '/  /\  \'|__    __|
-    | '|( '(|  |  | '|| |  | '|    | '|( '(|  |  | '|| |  | '|  _\  \''      _\  \''  | '|__ |  |  | '|   | '| '
-    |__|/__/ \__\/__/'\__\/__/'    |__|/__/ \__\/__/'\__\/__/' \__\/__/     \__\/__/  |_____| \__\/__/'  '|__|''  
+  //   cout << R"(
+  //    __  __    ____     ____        __  __    ____     ____       ______       ______  __       ____    ________
+  //   |  |\  \ /  /\  \'/  /\  \'    |  |\  \ /  /\  \'/  /\  \'   /  /\__\     /  /\__\|  |   '/  /\  \'|__    __|
+  //   | '|( '(|  |  | '|| |  | '|    | '|( '(|  |  | '|| |  | '|  _\  \''      _\  \''  | '|__ |  |  | '|   | '| '
+  //   |__|/__/ \__\/__/'\__\/__/'    |__|/__/ \__\/__/'\__\/__/' \__\/__/     \__\/__/  |_____| \__\/__/'  '|__|''  
     
-     )" <<endl;
+  //    )" <<endl;
      
-    this_thread::sleep_for(chrono::milliseconds(3000));
+  //   this_thread::sleep_for(chrono::milliseconds(3000));
 
-    clear_screen();
+  //   clear_screen();
 
 
-  User u1("boom", 5000, 5000); // for testing
+  User *u1 = new User("boom", 5000, 5000); // for testing
   start(u1);
 }

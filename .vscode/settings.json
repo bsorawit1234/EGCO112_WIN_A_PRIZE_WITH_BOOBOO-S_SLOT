@@ -6,7 +6,8 @@
     "iostream": "cpp",
     "exception": "cpp",
     "ios": "cpp",
-    "ctime": "cpp"
+    "ctime": "cpp",
+    "thread": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled"
 }
