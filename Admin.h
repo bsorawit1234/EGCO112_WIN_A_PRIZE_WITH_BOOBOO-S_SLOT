@@ -1,6 +1,16 @@
 // #include "User.h"
 
 void admin_page(ListUser A) {
+  system("@cls||clear");
+  std::string password;
+  std::cout << "-------- ADMIN ---------" << std::endl;
+  std::cout << "PASSWORD: ";
+  std::cin.clear();
+  std::cin.ignore(256, '\n');
+  std::getline(std::cin, password);
+
+  if(password != "1234") return;
+
   int choice, check_choice = 1;
   std::string name;
   User* temp;
@@ -13,6 +23,7 @@ void admin_page(ListUser A) {
   std::cout << "-------- ADMIN ---------" << std::endl;
   std::cout << "     1. GIVE MONEY" << std::endl;
   std::cout << "     2. GIVE VIP" << std::endl;
+  std::cout << "     3. BACK HOME" << std::endl;
   std::cout << "------------------------" << std::endl;
 
   while(check_choice) {
@@ -26,14 +37,17 @@ void admin_page(ListUser A) {
         throw "ONLY NUMBER !!";
       }
 
-      if(choice != 1 && choice != 2) {
-        throw "CHOOSE BETWEEN 1 AND 2";
+      if(choice < 1 || choice > 3) {
+        throw "CHOOSE BETWEEN 1-3";
       }
       check_choice = 0;
     } catch(const char* s) {
       std::cout << std::endl << s << std::endl << std::endl;
     }
   }
+
+  std::cin.clear();
+  std::cin.ignore(256, '\n');
   
   if(choice == 1) {
     float m;
@@ -74,7 +88,6 @@ void admin_page(ListUser A) {
         if(m < 100) {
           throw "MINIMUM MONEY IS $100";
         }
-
         check_m = 0;
       } catch(const char* s) {
         std::cout << std::endl << s << std::endl << std::endl;
@@ -87,6 +100,8 @@ void admin_page(ListUser A) {
 
   if(choice == 2) {
     //change class. 
+    std::cout << "Who do you want to give VIP: ";
+    std::getline(std::cin, name);
 
     std::cin.clear();
     std::cin.ignore(256,'\n');
@@ -109,28 +124,27 @@ void admin_page(ListUser A) {
         std::cout << e << std::endl;
       }
     } while(flag);
-    
     temp = A.find_node(name);
     A.class_changes(temp);
-
-  }
-
-  write.open("Total2.txt", std::fstream::app);
-  while(!read.eof()) {
-    std::getline(read, for_read);
-    if(for_read.length() == 0) continue;
-    std::istringstream ss(for_read);
-    ss >> target >> pass >> m >> c >> rank;
-    if(target == temp->name) {
-      if(choice == 2) write << target << ' ' << pass << ' ' << m << ' ' << c << ' ' << "vip" << std::endl; 
-      else write << target << ' ' << pass << ' ' << temp->get_money() << ' ' << c << ' ' << rank << std::endl; 
-    } else {
-      write << for_read << std::endl;
+ 
+    write.open("Total2.txt", std::fstream::app);
+    while(!read.eof()) {
+      std::getline(read, for_read);
+      if(for_read.length() == 0) continue;
+      std::istringstream ss(for_read);
+      ss >> target >> pass >> m >> c >> rank;
+      if(target == temp->name) {
+        if(choice == 2) write << target << ' ' << pass << ' ' << m << ' ' << c << ' ' << "vip" << std::endl; 
+        else write << target << ' ' << pass << ' ' << temp->get_money() << ' ' << c << ' ' << rank << std::endl; 
+      } else {
+        write << for_read << std::endl;
+      }
     }
-  }
-  write.close();
-  read.close();
-  remove("Total.txt");
-  rename("Total2.txt", "Total.txt");
 
+    write.close();
+    read.close();
+    remove("Total.txt");
+    rename("Total2.txt", "Total.txt");
+  }
+  if(choice == 3) return;
 }
