@@ -1,7 +1,7 @@
 #include "game.h"
 
 void status(User *player) {
-  //clear_screen();
+  clear_screen();
   std::cout << "-------- HOME ---------" << std::endl;
   std::cout << "  User    : " << player->name << std::endl;
   std::cout << "  Money   : " << player->get_money() << std::endl;

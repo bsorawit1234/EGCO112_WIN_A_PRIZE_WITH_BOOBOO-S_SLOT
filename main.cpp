@@ -43,8 +43,8 @@ void start() {
         throw "ONLY NUMBER !!";
       }
 
-      if(choose < 1 || choose > 3) {
-        throw "CHOOSE BETWEEN 1-3";
+      if(choose < 1 || choose > 4) {
+        throw "CHOOSE BETWEEN 1-4";
       }
       check_choose = 0;
     } catch(const char* s) {
@@ -55,12 +55,10 @@ void start() {
   
   switch(choose) {
     case 1: 
-      user = login_register(1);
-      break;
     case 2: 
-      user = login_register(2);
+      user = login_register(choose);
       break;
-    case 3:
+    case 4:
       return;
   }
 
@@ -81,10 +79,14 @@ void start() {
   
   player = Players.find_node(user); 
 
+  if(choose == 3) {
+    admin_page(Players);
+    return; 
+  }
+
+
   home(player);
   start();
-
-  //admin_page(Players);
 
 }
 
