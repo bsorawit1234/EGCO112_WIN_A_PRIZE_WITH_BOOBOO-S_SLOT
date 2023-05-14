@@ -47,16 +47,27 @@ void start() {
       if(choose < 1 || choose > 4) {
         throw "CHOOSE BETWEEN 1-4";
       }
+
+      if(choose == 2 || choose == 3) {
+        std::ifstream isempty("Total.txt");
+        if(isempty.fail()){
+          throw "You have not registered, please register first";
+        }
+      }
+
       check_choose = 0;
     } catch(const char* s) {
       std::cout << std::endl << s << std::endl << std::endl;
     }
   }
-  clear_screen();
   
+  clear_screen();    
+
   switch(choose) {
     case 1: 
-    case 2: 
+      user = login_register(1);
+      break;
+    case 2:  
       user = login_register(choose);
       break;
     case 4:
@@ -82,9 +93,9 @@ void start() {
 
   if(choose == 3) {
     admin_page(Players);
-    return; 
+    start();
+    return;
   }
-
 
   home(player);
   start();
