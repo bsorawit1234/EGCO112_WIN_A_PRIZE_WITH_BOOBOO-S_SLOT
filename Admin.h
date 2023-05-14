@@ -4,7 +4,8 @@ void admin_page(ListUser A) {
   int choice, check_choice = 1;
   std::string name;
   User* temp;
-  std::string for_read, for_write, target, pass, ranks, m, c, rank;
+  bool flag = true;
+  std::string for_read, for_write, userss, target, pass, ranks, m, c, rank;
   std::ifstream read("Total.txt");
   std::ofstream write;
 
@@ -35,12 +36,31 @@ void admin_page(ListUser A) {
   }
   
   if(choice == 1) {
-    std::cout << "Who do you want to give money: ";
-    std::getline(std::cin, name);
-    
     float m;
     int check_m = 1;
     
+    std::cin.clear();
+    std::cin.ignore(256,'\n');
+
+    do {     
+      try {
+        std::cout << "Who do you want to give money: ";
+        std::getline(std::cin, name);
+        std::ifstream check_name("Total.txt"); 
+        while(!check_name.eof()) {
+          std::getline(check_name, for_read);
+          std::istringstream ss(for_read);
+          ss >> userss;
+          if(userss == name) {
+            flag = false;
+          }
+        }
+        if(flag) throw "username doesn't exist.";
+      } catch(const char*& e) {
+        std::cout << e << std::endl;
+      }
+    } while(flag);
+     
     while(check_m) {
       try {
         std::cout << "How much money: ";
@@ -54,39 +74,63 @@ void admin_page(ListUser A) {
         if(m < 100) {
           throw "MINIMUM MONEY IS $100";
         }
-        check_choice = 0;
+
+        check_m = 0;
       } catch(const char* s) {
         std::cout << std::endl << s << std::endl << std::endl;
       }
     }
 
     A.find_node(name)->topup(m);
+    
   }
 
   if(choice == 2) {
     //change class. 
-    std::cout << "Who do you want to give VIP: " << std::endl;
-    std::getline(std::cin, name);
+
+    std::cin.clear();
+    std::cin.ignore(256,'\n');
+
+    do {     
+      try {
+        std::cout << "Who do you want to give VIP: ";
+        std::getline(std::cin, name);
+        std::ifstream check_name("Total.txt"); 
+        while(!check_name.eof()) {
+          std::getline(check_name, for_read);
+          std::istringstream ss(for_read);
+          ss >> userss;
+          if(userss == name) {
+            flag = false;
+          }
+        }
+        if(flag) throw "username doesn't exist.";
+      } catch(const char*& e) {
+        std::cout << e << std::endl;
+      }
+    } while(flag);
     
     temp = A.find_node(name);
     A.class_changes(temp);
 
-    write.open("Total2.txt", std::fstream::app);
-    while(!read.eof()) {
-      std::getline(read, for_read);
-      if(for_read.length() == 0) continue;
-      std::istringstream ss(for_read);
-      ss >> target >> pass >> m >> c >> rank;
-      if(target == temp->name) {
-        write << target << ' ' << pass << ' ' << m << ' ' << c << ' ' << "vip" << std::endl;
-      } else {
-        write << for_read << std::endl;
-      }
-    }
-    write.close();
-    read.close();
-    remove("Total.txt");
-    rename("Total2.txt", "Total.txt");
   }
+
+  write.open("Total2.txt", std::fstream::app);
+  while(!read.eof()) {
+    std::getline(read, for_read);
+    if(for_read.length() == 0) continue;
+    std::istringstream ss(for_read);
+    ss >> target >> pass >> m >> c >> rank;
+    if(target == temp->name) {
+      if(choice == 2) write << target << ' ' << pass << ' ' << m << ' ' << c << ' ' << "vip" << std::endl; 
+      else write << target << ' ' << pass << ' ' << temp->get_money() << ' ' << c << ' ' << rank << std::endl; 
+    } else {
+      write << for_read << std::endl;
+    }
+  }
+  write.close();
+  read.close();
+  remove("Total.txt");
+  rename("Total2.txt", "Total.txt");
 
 }
