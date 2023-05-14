@@ -28,7 +28,8 @@ void start() {
   std::cout << " " << std::endl;
   std::cout << "                   PRESS 1 TO REGISTER                " << std::endl;
   std::cout << "                   PRESS 2 TO LOGIN " << std::endl;
-  std::cout << "                   PRESS 3 TO EXIT GAME" << std::endl;
+  std::cout << "                   PRESS 3 TO ADMIN" << std::endl;
+  std::cout << "                   PRESS 4 TO EXIT" << std::endl;
   std::cout << " " << std::endl;
   std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--* " << std::endl;
 
