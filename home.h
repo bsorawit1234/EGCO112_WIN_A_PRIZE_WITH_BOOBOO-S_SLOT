@@ -3,7 +3,7 @@
 void status(User *player) {
   clear_screen();
   std::cout << "-------- HOME ---------" << std::endl;
-  std::cout << "  User    : " << player->name << std::endl;
+  std::cout << "  User    : " << player->get_rank() << player->name << std::endl;
   std::cout << "  Money   : " << player->get_money() << std::endl;
   std::cout << "  Credits : " << player->get_credits() << std::endl;
   std::cout << "-----------------------" << std::endl;
