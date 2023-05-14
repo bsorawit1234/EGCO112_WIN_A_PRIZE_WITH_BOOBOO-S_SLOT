@@ -45,9 +45,6 @@ void admin_page(ListUser A) {
       std::cout << std::endl << s << std::endl << std::endl;
     }
   }
-
-  std::cin.clear();
-  std::cin.ignore(256, '\n');
   
   if(choice == 1) {
     float m;
@@ -100,8 +97,6 @@ void admin_page(ListUser A) {
 
   if(choice == 2) {
     //change class. 
-    std::cout << "Who do you want to give VIP: ";
-    std::getline(std::cin, name);
 
     std::cin.clear();
     std::cin.ignore(256,'\n');
@@ -126,25 +121,27 @@ void admin_page(ListUser A) {
     } while(flag);
     temp = A.find_node(name);
     A.class_changes(temp);
- 
-    write.open("Total2.txt", std::fstream::app);
-    while(!read.eof()) {
-      std::getline(read, for_read);
-      if(for_read.length() == 0) continue;
-      std::istringstream ss(for_read);
-      ss >> target >> pass >> m >> c >> rank;
-      if(target == temp->name) {
-        if(choice == 2) write << target << ' ' << pass << ' ' << m << ' ' << c << ' ' << "vip" << std::endl; 
-        else write << target << ' ' << pass << ' ' << temp->get_money() << ' ' << c << ' ' << rank << std::endl; 
-      } else {
-        write << for_read << std::endl;
-      }
-    }
 
-    write.close();
-    read.close();
-    remove("Total.txt");
-    rename("Total2.txt", "Total.txt");
   }
+
+  write.open("Total2.txt", std::fstream::app);
+  while(!read.eof()) {
+    std::getline(read, for_read);
+    if(for_read.length() == 0) continue;
+    std::istringstream ss(for_read);
+    ss >> target >> pass >> m >> c >> rank;
+    if(target == temp->name) {
+      if(choice == 2) write << target << ' ' << pass << ' ' << m << ' ' << c << ' ' << "vip" << std::endl; 
+      else write << target << ' ' << pass << ' ' << temp->get_money() << ' ' << c << ' ' << rank << std::endl; 
+    } else {
+      write << for_read << std::endl;
+    }
+  }
+
+  write.close();
+  read.close();
+  remove("Total.txt");
+  rename("Total2.txt", "Total.txt");
+  
   if(choice == 3) return;
 }

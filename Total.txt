@@ -1,2 +1,0 @@
-thin thin 15555 20 user
-pair 5555 6555 20 user
