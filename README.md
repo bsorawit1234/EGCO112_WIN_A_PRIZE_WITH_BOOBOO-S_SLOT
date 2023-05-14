@@ -18,3 +18,7 @@
          - You got 5 times of bet
       3. Palindrome numbers prize 3 times Ex. 121, 040, 282
          - You got 3 times of bet
+
+## How to run this game
+
+### compile main.cpp
