@@ -1,6 +1,6 @@
 # WIN A PRIZE WITH BOO BOO'S SLOT
 
-# # How to play
+## How to play
 
 1. Create Account
    1. Register
