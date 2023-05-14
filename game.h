@@ -104,7 +104,7 @@ void game(User *player) {
   slot_game(bet, s, player);
 
   char choice;
-  if(player->get_credits() > 0) {
+  if(player->get_credits() > 100) {
     while(check_choice) {
       try {
         std::cout << std::endl << "Do you want to play again?" << std::endl << "(Y/N): ";
