@@ -1,7 +1,7 @@
 #include "game.h"
 
 void status(User *player) {
-  clear_screen();
+  //clear_screen();
   std::cout << "-------- HOME ---------" << std::endl;
   std::cout << "  User    : " << player->name << std::endl;
   std::cout << "  Money   : " << player->get_money() << std::endl;
@@ -232,7 +232,7 @@ void home(User *player) {
       home(player);
       break;
     case 4: {
-      std::string for_read, for_write, target, pass;
+      std::string for_read, for_write, target, pass, ranks, m, c, rank;
       std::ifstream read("Total.txt");
       std::ofstream write;
       write.open("Total2.txt", std::fstream::app);
@@ -240,9 +240,9 @@ void home(User *player) {
         std::getline(read, for_read);
         if(for_read.length() == 0) continue;
         std::istringstream ss(for_read);
-        ss >> target >> pass;
+        ss >> target >> pass >> m >> c >> rank;
         if(target == player->name) {
-          write << player->name << ' ' << pass << ' ' << player->get_money() << ' ' << player->get_credits() << std::endl;
+          write << player->name << ' ' << pass << ' ' << player->get_money() << ' ' << player->get_credits() << ' ' << rank << std::endl;
         } else {
           write << for_read << std::endl;
         }

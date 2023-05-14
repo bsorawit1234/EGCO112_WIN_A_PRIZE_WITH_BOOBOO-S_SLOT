@@ -6,6 +6,7 @@ std::string login_register(int choose) {
     ListUser Players;
     User *for_return;
     std::string user, pass, repass, read_from_file, users, passe; 
+    const std::string USER = "user", VIP = "vip";
     int flag;
     float money, Money, credits, credit;
     const float STARTER_CREDITS = 20;
@@ -85,7 +86,7 @@ std::string login_register(int choose) {
                 }
             } while (flag);
             opened.open("Total.txt", std::fstream::app);
-            opened << user << ' ' << pass << ' ' << money << ' ' << STARTER_CREDITS << std::endl;
+            opened << user << ' ' << pass << ' ' << money << ' ' << STARTER_CREDITS << ' ' << USER << std::endl;
             opened.close();
 
         } break;
