@@ -80,8 +80,8 @@ void admin_page(ListUser A) {
         std::cout << std::endl << s << std::endl << std::endl;
       }
     }
-
-    A.find_node(name)->topup(m);
+    temp = A.find_node(name);
+    temp->topup(m);
     
   }
 
