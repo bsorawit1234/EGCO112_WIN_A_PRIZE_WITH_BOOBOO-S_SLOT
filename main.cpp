@@ -82,6 +82,7 @@ void start() {
 
   if(choose == 3) {
     admin_page(Players);
+    start();
     return; 
   }
 

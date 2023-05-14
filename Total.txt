@@ -1,1 +1,2 @@
 boom 1234 0 20 vip
+khun 1111 5000 20 user
