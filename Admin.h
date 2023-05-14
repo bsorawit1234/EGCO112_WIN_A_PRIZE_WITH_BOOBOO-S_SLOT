@@ -74,7 +74,8 @@ void admin_page(ListUser A) {
       }
     }
 
-    A.find_node(name)->topup(m);
+    temp = A.find_node(name);
+    temp->topup(m);
   }
 
   if(choice == 2) {
