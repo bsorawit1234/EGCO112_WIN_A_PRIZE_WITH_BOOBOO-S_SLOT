@@ -4,10 +4,12 @@ class User {
     float credits;
   public:
     std::string name;
+    std::string USER = "";
     User* next;
 
     User(std::string = "Tee", float = 0, float = 0);
     virtual ~User();
+    virtual std::string get_rank();
     void withdraw(float);
     virtual void deposit(float);
     float get_credits() { return credits; }
@@ -59,13 +61,21 @@ void User::insert(User *x) {
   x->next = this;
 }
 
+std::string User::get_rank() {
+  return USER;
+}
+
 class VIP: public User {
   public :
+    std::string vip = "[VIP]";
     void deposit(float d) {
       if(money >= d) {
         credits += d*1.1;
         money -= d;
       }
+    }
+    std::string get_rank() {
+      return vip;
     }
     VIP(std::string, float = 0, float = 0);
     ~VIP();
