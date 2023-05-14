@@ -52,7 +52,7 @@ std::string login_register(int choose) {
             do { // check password = re-password ???
                 flag = 0;
                 try {
-                    std::cout << "reenter password : "; getline(std::cin, repass);
+                    std::cout << "re-enter password : "; getline(std::cin, repass);
                     std::cin.clear();
                     if( pass != repass ) {
                         throw pm;

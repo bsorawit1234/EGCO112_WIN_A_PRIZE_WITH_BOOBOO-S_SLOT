@@ -15,6 +15,6 @@
       1. All of numbers is the same prize 10 times Ex. 999, 333
          - You got 10 times of bet
       2. Sequence numbers 5 prize Ex. 123, 345, 987
-         - You got 10 times of bet
+         - You got 5 times of bet
       3. Palindrome numbers prize 3 times Ex. 121, 040, 282
-         - You got 10 times of bet
+         - You got 3 times of bet
