@@ -13,7 +13,7 @@ class User {
     float get_credits() { return credits; }
     float get_money() { return money; }
     void bet(float);
-    void topup(float);
+    virtual void topup(float);
     void insert(User *);
 };
 

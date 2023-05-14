@@ -118,7 +118,9 @@ std::string login_register(int choose) {
                         user_correct = true;
                         break;
                     }
-                } if(user_correct) {
+                } 
+
+                if(user_correct) {
                     if(passe != pass) {
                         count--;
                         flag = 1;
@@ -131,7 +133,6 @@ std::string login_register(int choose) {
             } while (flag);
         } break;
 
-        default : std::cout << "eiei" << std::endl;
     }
 
     return user;
