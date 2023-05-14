@@ -6,15 +6,11 @@
 #include <exception>
 #include <sstream>
 
-#include <chrono>
-#include <thread>  
-
-// using namespace std;
-
 #include "ListUser.h"
 #include "excep_tion.h"
 #include "login_register.h"
 #include "home.h"
+#include "Admin.h"
 
 void start() {
   ListUser Players;
@@ -81,13 +77,12 @@ void start() {
 
   home(player);
   start();
-
 }
 
 void intro() {
   clear_screen();
   
-  msleep(2000);
+  msleep(800);
   std::cout << "      __    __  __  __  ___          _          __ ___   __  __   __  ______   __  __" << std::endl;
   std::cout << "     |  |  |  ||  ||  \\|   |        / \\        |  |\\   \\|  |\\  \\'|  ||___  /  |  |\\  \\" << std::endl;
   std::cout << "     | '|/\\| '|| '|| '|\\  '|      '/  '\\       |  '|/__/| '|/  / | '|   /'/__ |  _''>" << std::endl;
