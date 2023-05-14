@@ -24,9 +24,9 @@ std::string login_register(int choose) {
             std::ofstream opened;
             opened.open("Total.txt", std::fstream::app);
             opened.close();
-            std::cout << "------------------------------------------------------------------------------------" << std::endl;
-            std::cout << "\t\t\t\t\tRegister" << std::endl;
-            std::cout << "------------------------------------------------------------------------------------" << std::endl;
+            std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*" << std::endl;
+            std::cout << "                        Register" << std::endl;
+            std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*" << std::endl;
 
             do { // username that user entered has already been taken or not.
                 flag = 0;
@@ -95,9 +95,9 @@ std::string login_register(int choose) {
             int count = 3; //if user entered username or password incorrect 3 times, program will terminate.
             bool user_correct;
 
-            std::cout << "------------------------------------------------------------------------------------" << std::endl;
-            std::cout << "\t\t\t\t\tLogin" << std::endl;
-            std::cout << "------------------------------------------------------------------------------------" << std::endl;
+            std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*" << std::endl;
+            std::cout << "                          Login" << std::endl;
+            std::cout << "*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*-*--*-*--*" << std::endl;
             do {
                 std::fstream file("Total.txt");
                 flag = 0;
