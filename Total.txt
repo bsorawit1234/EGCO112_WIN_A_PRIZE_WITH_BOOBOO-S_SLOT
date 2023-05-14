@@ -1,3 +1,0 @@
-thin thin 8234 570 vip
-haha haha 700 20 user
-jkjk jkjkj 0 20 user
