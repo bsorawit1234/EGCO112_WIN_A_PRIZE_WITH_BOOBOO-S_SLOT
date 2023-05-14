@@ -14,9 +14,10 @@
 
 void start() {
   ListUser Players;
-  User *player;
+  User *player, *create_LL;
   int choose, check_choose = 1;
-  std::string user, users, passe, read_from_file;
+  std::string user, users, passe, read_from_file, ranks;
+  const std::string USER = "user", vip = "vip";
   float Money, credit;
 
   clear_screen();
@@ -50,14 +51,13 @@ void start() {
       std::cout << std::endl << s << std::endl << std::endl;
     }
   }
-
   clear_screen();
   
   switch(choose) {
-    case 1:
+    case 1: 
       user = login_register(1);
       break;
-    case 2:
+    case 2: 
       user = login_register(2);
       break;
     case 3:
@@ -69,15 +69,23 @@ void start() {
     std::getline(insert_ll, read_from_file);
     if(read_from_file.length() == 0) continue;
     std::istringstream ss(read_from_file);
-    ss >> users >> passe >> Money >> credit;
-    Players.insert(users, Money, credit);
+    ss >> users >> passe >> Money >> credit >> ranks;
+    if(ranks == USER) {
+      create_LL = new User(users, Money, credit);
+    } else if(ranks == vip) {
+      create_LL = new VIP(users, Money, credit);
+    }
+    Players.add_node(create_LL);
   }
   insert_ll.close();
   
-  player = Players.find_node(user);
+  player = Players.find_node(user); 
 
   home(player);
   start();
+
+  //admin_page(Players);
+
 }
 
 void intro() {
@@ -109,5 +117,8 @@ int main() {
   srand(time(NULL));
 
   intro();
+
   start();
+
+  return 0;
 }

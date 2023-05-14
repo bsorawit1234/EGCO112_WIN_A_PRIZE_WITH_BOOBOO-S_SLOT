@@ -59,4 +59,21 @@ class ListUser{
       return nullptr;
     }
 
+    void add_node(User *A) {
+      head->insert(A);
+      head = A;
+      size++;
+    }
+
+    void class_changes(User* A) {
+      VIP* new_A = new VIP(A->name, A->get_money(), A->get_credits());
+      User* temp = head;
+      while(temp) {
+        if(temp->name == A->name) {
+          temp = new_A;
+        }
+        temp = temp->next;
+      }
+    }
+
 };
