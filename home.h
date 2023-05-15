@@ -45,7 +45,7 @@ void deposit(User *player) {
   status(player);
   std::cout << std::endl << player->name << " deposited " << d << "$" << std::endl;
   
-  if(player->get_money() == 0) return;
+  if(player->get_money() < 100) return;
   std::cout << std::endl << "Do you want to deposit more?" << std::endl;
   while(check_m) {
     try {
@@ -103,7 +103,7 @@ void withdraw(User *player) {
   status(player);
   std::cout << std::endl << player->name << " withdrew " << w << "$" << std::endl;
   
-  if(player->get_credits() == 0) return;
+  if(player->get_credits() < 100) return;
   std::cout << std::endl << "Do you want to withdraw more?" << std::endl;
   while(check_m) {
     try {
